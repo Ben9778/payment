@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="pay.posdzd">
+  <resultMap id="BaseResultMap" type="com.ylz.yx.pay.record.model.PayPosdzd">
+    <result column="DZRQ00" jdbcType="VARCHAR" property="dzrq00" />
+    <result column="SHH000" jdbcType="VARCHAR" property="shh000" />
+    <result column="QSRQ00" jdbcType="VARCHAR" property="qsrq00" />
+    <result column="JYRQ00" jdbcType="VARCHAR" property="jyrq00" />
+    <result column="JYSJ00" jdbcType="VARCHAR" property="jysj00" />
+    <result column="ZDH000" jdbcType="VARCHAR" property="zdh000" />
+    <result column="JYJE00" jdbcType="NUMERIC" property="jyje00" />
+    <result column="QSJE00" jdbcType="NUMERIC" property="qsje00" />
+    <result column="SXF000" jdbcType="NUMERIC" property="sxf000" />
+    <result column="LSH000" jdbcType="VARCHAR" property="lsh000" />
+    <result column="JYLX00" jdbcType="VARCHAR" property="jylx00" />
+    <result column="KH0000" jdbcType="VARCHAR" property="kh0000" />
+    <result column="XTCKH0" jdbcType="VARCHAR" property="xtckh0" />
+    <result column="FKH000" jdbcType="VARCHAR" property="fkh000" />
+    <result column="KLX000" jdbcType="VARCHAR" property="klx000" />
+  </resultMap>
+
+  <select id="selectCount" resultType="java.lang.Integer" parameterType="java.lang.String">
+    select count(*) from pay_posdzd where to_char(dzrq00,'yyyyMMdd') = #{billDate}
+  </select>
+
+  <insert id="insertSelective" parameterType="com.ylz.yx.pay.record.model.PayPosdzd">
+    insert into PAY_POSDZD
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="dzrq00 != null">
+        DZRQ00,
+      </if>
+      <if test="shh000 != null">
+        SHH000,
+      </if>
+      <if test="qsrq00 != null">
+        QSRQ00,
+      </if>
+      <if test="jyrq00 != null">
+        JYRQ00,
+      </if>
+      <if test="jysj00 != null">
+        JYSJ00,
+      </if>
+      <if test="zdh000 != null">
+        ZDH000,
+      </if>
+      <if test="jyje00 != null">
+        JYJE00,
+      </if>
+      <if test="qsje00 != null">
+        QSJE00,
+      </if>
+      <if test="sxf000 != null">
+        SXF000,
+      </if>
+      <if test="lsh000 != null">
+        LSH000,
+      </if>
+      <if test="jylx00 != null">
+        JYLX00,
+      </if>
+      <if test="kh0000 != null">
+        KH0000,
+      </if>
+      <if test="xtckh0 != null">
+        XTCKH0,
+      </if>
+      <if test="fkh000 != null">
+        FKH000,
+      </if>
+      <if test="klx000 != null">
+        KLX000,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="dzrq00 != null">
+        to_date(#{dzrq00,jdbcType=VARCHAR},'yyyy-MM-dd'),
+      </if>
+      <if test="shh000 != null">
+        #{shh000,jdbcType=VARCHAR},
+      </if>
+      <if test="qsrq00 != null">
+        #{qsrq00,jdbcType=VARCHAR},
+      </if>
+      <if test="jyrq00 != null">
+        #{jyrq00,jdbcType=VARCHAR},
+      </if>
+      <if test="jysj00 != null">
+        #{jysj00,jdbcType=VARCHAR},
+      </if>
+      <if test="zdh000 != null">
+        #{zdh000,jdbcType=VARCHAR},
+      </if>
+      <if test="jyje00 != null">
+        #{jyje00,jdbcType=NUMERIC},
+      </if>
+      <if test="qsje00 != null">
+        #{qsje00,jdbcType=NUMERIC},
+      </if>
+      <if test="sxf000 != null">
+        #{sxf000,jdbcType=NUMERIC},
+      </if>
+      <if test="lsh000 != null">
+        #{lsh000,jdbcType=VARCHAR},
+      </if>
+      <if test="jylx00 != null">
+        #{jylx00,jdbcType=VARCHAR},
+      </if>
+      <if test="kh0000 != null">
+        #{kh0000,jdbcType=VARCHAR},
+      </if>
+      <if test="xtckh0 != null">
+        #{xtckh0,jdbcType=VARCHAR},
+      </if>
+      <if test="fkh000 != null">
+        #{fkh000,jdbcType=VARCHAR},
+      </if>
+      <if test="klx000 != null">
+        #{klx000,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+
+  <update id="updateByDzrq00" parameterType="java.lang.String">
+    update PAY_POSDZD set SFYDZ0 = '0' where to_char(dzrq00,'yyyyMMdd') = #{billDate}
+  </update>
+
+  <delete id="deleteByDzrq00" parameterType="java.lang.String">
+    delete from PAY_POSDZD where to_char(dzrq00, 'yyyyMMdd') = #{billDate}
+  </delete>
+</mapper>

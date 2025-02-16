@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="pay.zfdzhz">
+    <resultMap id="BaseResultMap" type="com.ylz.yx.pay.record.model.PayZfdzhz">
+        <result column="ID0000" jdbcType="VARCHAR" property="id0000"/>
+        <result column="XTDZSJ" jdbcType="TIMESTAMP" property="xtdzsj"/>
+        <result column="ZFQD00" jdbcType="VARCHAR" property="zfqd00"/>
+        <result column="ZFQDMC" jdbcType="VARCHAR" property="zfqdmc"/>
+        <result column="PTJE00" jdbcType="NUMERIC" property="ptje00"/>
+        <result column="PTBS00" jdbcType="NUMERIC" property="ptbs00"/>
+        <result column="FWQDJE" jdbcType="NUMERIC" property="fwqdje"/>
+        <result column="FWQDBS" jdbcType="NUMERIC" property="fwqdbs"/>
+        <result column="ZFPTJE" jdbcType="NUMERIC" property="zfptje"/>
+        <result column="ZFPTBS" jdbcType="NUMERIC" property="zfptbs"/>
+        <result column="FWDZJG" jdbcType="VARCHAR" property="fwdzjg"/>
+        <result column="ZFDZJG" jdbcType="VARCHAR" property="zfdzjg"/>
+        <result column="FWCYJE" jdbcType="NUMERIC" property="fwcyje"/>
+        <result column="ZFCYJE" jdbcType="NUMERIC" property="zfcyje"/>
+        <result column="CLJD00" jdbcType="VARCHAR" property="cljd00"/>
+    </resultMap>
+
+    <select id="zfqddzhz" parameterType="com.ylz.yx.pay.record.model.QueryParam" resultMap="BaseResultMap">
+        select zfqd00,
+               max(b.zfqdmc) zfqdmc,
+               sum(ptczje) - sum(pttkje) ptje00,
+               sum(ptbs00) ptbs00,
+               sum(fwczje) - sum(fwtkje) fwqdje,
+               sum(fwqdbs) fwqdbs,
+               sum(zfczje) - sum(zftkje) zfptje,
+               sum(zfptbs) zfptbs,
+               replace(LISTAGG(fwdzjg, ',') within
+                              group(order by zfqd00),
+                       ',',
+                       chr(10)) fwdzjg,
+               replace(LISTAGG(zfdzjg, ',') within
+                              group(order by zfqd00),
+                       ',',
+                       chr(10)) zfdzjg,
+               sum(fwcyje) fwcyje,
+               sum(zfcyje) zfcyje,
+               replace(LISTAGG(cljd00, ',') within
+                              group(order by zfqd00),
+                       ',',
+                       chr(10)) cljd00
+        from pay_zfdzhz a,
+             pay_zfqd00 b
+        where a.zfqd00 = b.id0000(+)
+          and to_char(xtdzsj, 'yyyy-MM-dd') between #{ksrq00} and #{jsrq00}
+        group by zfqd00
+    </select>
+
+    <delete id="delete" parameterType="java.lang.String">
+        delete from pay_zfdzhz where to_char(xtdzsj, 'yyyyMMdd') = #{billDate}
+    </delete>
+
+    <insert id="insert" parameterType="java.lang.String">
+        insert into PAY_ZFDZHZ(xtdzsj, zfqd00, ptje00, ptbs00, fwqdje, fwqdbs, zfptje, zfptbs, fwdzjg, zfdzjg, fwcyje,
+                               zfcyje, cljd00, ptczje, pttkje, fwczje, fwtkje, zfczje, zftkje)
+        select to_date(#{billDate}, 'yyyyMMdd'),
+               zfqd00,
+               ptje00,
+               ptbs00,
+               fwqdje,
+               fwqdbs,
+               zfptje,
+               zfptbs,
+               replace(replace(replace(fwdzjg, 'nual;', ''), ';', chr(10)), 'nual', '对账一致') fwdzjg,
+               replace(replace(replace(zfdzjg, 'nual;', ''), ';', chr(10)), 'nual', '对账一致') zfdzjg,
+               fwcyje,
+               zfcyje,
+               case when cljd00 = '0' and clzt00 = '0' then '无需处理' when cljd00 = '0' and clzt00 > cljd00 then '已处理' else cljd00 || '笔待处理' end,
+               ptczje,
+               pttkje,
+               fwczje,
+               fwtkje,
+               zfczje,
+               zftkje
+        from (select zfqd00,
+                     sum(ptje00) ptje00,
+                     sum(ptbs00) ptbs00,
+                     sum(fwqdje) fwqdje,
+                     sum(fwqdbs) fwqdbs,
+                     sum(zfptje) zfptje,
+                     sum(zfptbs) zfptbs,
+                     LISTAGG(case when fwcyje = 0 then 'nual' else decode(fwdzjg, '1', '对账一致', '2', '长款', '3', '短款', '4', '金额不一致', '5', '特殊异常账') || '￥' ||
+                     to_char(fwcyje, 'fm9999999990.00') || '元/' || ycbs00 || '笔' end, ';') within group(order by fwdzjg) as fwdzjg,
+                     LISTAGG(case when zfcyje = 0 then 'nual' else decode(zfdzjg, '1', '对账一致', '2', '长款', '3', '短款', '4', '金额不一致', '5', '特殊异常账') || '￥' ||
+                     to_char(abs(zfcyje), 'fm9999999990.00') || '元/' || ycbs00 || '笔' end, ';') within group (order by zfdzjg) as zfdzjg,
+                     sum(fwcyje) fwcyje,
+                     sum(abs(zfcyje)) zfcyje,
+                     sum(cljd00) cljd00,
+                     sum(clzt00) clzt00,
+                     sum(ptczje) ptczje,
+                     sum(pttkje) pttkje,
+                     sum(fwczje) fwczje,
+                     sum(fwtkje) fwtkje,
+                     sum(zfczje) zfczje,
+                     sum(zftkje) zftkje
+              from (select d.id0000 zfqd00,
+                  sum(ptje00) ptje00,
+                  sum(case when ptje00 > 0 then 1 else 0 end) ptbs00,
+                  sum(fwqdje) fwqdje,
+                  sum(case when fwqdje > 0 then 1 else 0 end) fwqdbs,
+                  sum(zfptje) zfptje,
+                  sum(case when zfptje > 0 then 1 else 0 end) zfptbs,
+                  fwdzjg,
+                  zfdzjg,
+                  sum(fwcyje) fwcyje,
+                  sum(zfcyje) zfcyje,
+                  sum(case when yczt00 = '1' then 1 else 0 end) ycbs00,
+                  sum(case when clzt00 = '0' then 1 else 0 end) cljd00,
+                  sum(case when clzt00 = '1' then 1 else 0 end) clzt00,
+                  sum(case when ywlx00 = '充值' then ptje00 else 0 end) ptczje,
+                  sum(case when ywlx00 = '退款' then ptje00 else 0 end) pttkje,
+                  sum(case when ywlx00 = '充值' then fwqdje else 0 end) fwczje,
+                  sum(case when ywlx00 = '退款' then fwqdje else 0 end) fwtkje,
+                  sum(case when ywlx00 = '充值' then zfptje else 0 end) zfczje,
+                  sum(case when ywlx00 = '退款' then zfptje else 0 end) zftkje
+                  from pay_dzmxb0 a, (select b.id0000,c.fwqdid,b.qdbm00 from pay_zfqd00 b, pay_fwzfgx c where c.zfqdid = b.id0000) d
+                  where a.fwqdid = d.fwqdid(+)
+                  and a.zfqd00 = d.qdbm00(+)
+                  and to_char(XTDZSJ, 'yyyyMMdd') = #{billDate}
+                  group by d.id0000, fwdzjg, zfdzjg
+                  )
+              group by zfqd00)
+    </insert>
+</mapper>

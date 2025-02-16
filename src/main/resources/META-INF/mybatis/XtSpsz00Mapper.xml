@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="system.spsz00">
+  <resultMap id="BaseResultMap" type="com.ylz.yx.pay.system.approval.model.XtSpsz00">
+    <id column="ID0000" jdbcType="VARCHAR" property="id0000" />
+    <result column="SFQY00" jdbcType="VARCHAR" property="sfqy00" />
+    <result column="YYMK00" jdbcType="VARCHAR" property="yymk00" />
+    <result column="SPFS00" jdbcType="VARCHAR" property="spfs00" />
+    <result column="SFDXTZ" jdbcType="VARCHAR" property="sfdxtz" />
+    <result column="LCSZ00" jdbcType="CLOB" property="lcsz00" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ID0000, SFQY00, YYMK00, SPFS00, SFDXTZ, LCSZ00
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from XT_SPSZ00
+    where ID0000 = #{id0000,jdbcType=VARCHAR}
+  </select>
+  <select id="select" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from XT_SPSZ00
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from XT_SPSZ00
+    where ID0000 = #{id0000,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.ylz.yx.pay.system.approval.model.XtSpsz00">
+    insert into XT_SPSZ00 (ID0000, SFQY00, YYMK00, 
+      SPFS00, SFDXTZ, LCSZ00
+      )
+    values (#{id0000,jdbcType=VARCHAR}, #{sfqy00,jdbcType=VARCHAR}, #{yymk00,jdbcType=VARCHAR}, 
+      #{spfs00,jdbcType=VARCHAR}, #{sfdxtz,jdbcType=VARCHAR}, #{lcsz00,jdbcType=CLOB}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.ylz.yx.pay.system.approval.model.XtSpsz00">
+    insert into XT_SPSZ00
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id0000 != null">
+        ID0000,
+      </if>
+      <if test="sfqy00 != null">
+        SFQY00,
+      </if>
+      <if test="yymk00 != null">
+        YYMK00,
+      </if>
+      <if test="spfs00 != null">
+        SPFS00,
+      </if>
+      <if test="sfdxtz != null">
+        SFDXTZ,
+      </if>
+      <if test="lcsz00 != null">
+        LCSZ00,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id0000 != null">
+        #{id0000,jdbcType=VARCHAR},
+      </if>
+      <if test="sfqy00 != null">
+        #{sfqy00,jdbcType=VARCHAR},
+      </if>
+      <if test="yymk00 != null">
+        #{yymk00,jdbcType=VARCHAR},
+      </if>
+      <if test="spfs00 != null">
+        #{spfs00,jdbcType=VARCHAR},
+      </if>
+      <if test="sfdxtz != null">
+        #{sfdxtz,jdbcType=VARCHAR},
+      </if>
+      <if test="lcsz00 != null">
+        #{lcsz00,jdbcType=CLOB},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ylz.yx.pay.system.approval.model.XtSpsz00">
+    update XT_SPSZ00
+    <set>
+      <if test="sfqy00 != null">
+        SFQY00 = #{sfqy00,jdbcType=VARCHAR},
+      </if>
+      <if test="yymk00 != null">
+        YYMK00 = #{yymk00,jdbcType=VARCHAR},
+      </if>
+      <if test="spfs00 != null">
+        SPFS00 = #{spfs00,jdbcType=VARCHAR},
+      </if>
+      <if test="sfdxtz != null">
+        SFDXTZ = #{sfdxtz,jdbcType=VARCHAR},
+      </if>
+      <if test="lcsz00 != null">
+        LCSZ00 = #{lcsz00,jdbcType=VARCHAR},
+      </if>
+    </set>
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.ylz.yx.pay.system.approval.model.XtSpsz00">
+    update XT_SPSZ00
+    set SFQY00 = #{sfqy00,jdbcType=VARCHAR},
+      YYMK00 = #{yymk00,jdbcType=VARCHAR},
+      SPFS00 = #{spfs00,jdbcType=VARCHAR},
+      SFDXTZ = #{sfdxtz,jdbcType=VARCHAR},
+      LCSZ00 = #{lcsz00,jdbcType=CLOB}
+    where ID0000 = #{id0000,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ylz.yx.pay.system.approval.model.XtSpsz00">
+    update XT_SPSZ00
+    set SFQY00 = #{sfqy00,jdbcType=VARCHAR},
+      YYMK00 = #{yymk00,jdbcType=VARCHAR},
+      SPFS00 = #{spfs00,jdbcType=VARCHAR},
+      SFDXTZ = #{sfdxtz,jdbcType=VARCHAR}
+    where ID0000 = #{id0000,jdbcType=VARCHAR}
+  </update>
+</mapper>

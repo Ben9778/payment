@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http#{//mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="system.ptjhgnhb">
+
+    <select id="getRolePermissionList" resultType="com.ylz.yx.pay.system.role.model.TreeStructure"
+            parameterType="java.util.Map">
+        select key, id, title, parent, level, path, component from
+
+        <if test="jslx00 == 1">
+            (select a.jhgnid key, a.gnbm00 id, a.jhgnmc title, case when instr(a.gnbm00, '-') = 0 then ''
+            when instr(a.gnbm00, '-') > 0 then substr(a.gnbm00, 0, instr(a.gnbm00, '-', -1) - 1)
+            else '' end parent, substr(a.qqym00, instr(a.qqym00, '/', -1) + 1) path, a.qqym00 component,
+            a.ssxtdm, a.gnlx00, a.gnbm00
+            from pt_jhgnhb a where
+        </if>
+
+        <if test="jslx00 != 1">
+            (select a.jhgnid key, a.gnbm00 id, a.jhgnmc title, case when instr(a.gnbm00, '-') = 0 then ''
+            when instr(a.gnbm00, '-') > 0 then substr(a.gnbm00, 0, instr(a.gnbm00, '-', -1) - 1)
+            else '' end parent, substr(a.qqym00, instr(a.qqym00, '/', -1) + 1) path, a.qqym00 component,
+            a.ssxtdm, a.gnlx00, a.gnbm00
+            from pt_jhgnhb a, pt_jsgnb0 b where a.jhgnid = b.jhgnid
+            and b.jsid00 = #{jsid00} and
+        </if>
+
+        a.ssxtdm = 'IC'
+        and a.sqsxs0 = 1
+        and a.sfyx00 = '1')
+        start with parent is null
+        connect by prior id = parent
+        order by level, ssxtdm, gnlx00, gnbm00
+    </select>
+
+    <select id="getRolePermissionId" resultType="java.lang.String"
+            parameterType="java.util.Map">
+        select a.jhgnid from
+        pt_jhgnhb a, pt_jsgnb0 b where a.jhgnid = b.jhgnid
+        and b.jsid00 = #{jsid00}
+        and a.ssxtdm = 'IC'
+        and a.sqsxs0 = 1
+        and a.sfyx00 = '1'
+        order by a.ssxtdm, a.gnlx00, a.gnbm00
+    </select>
+
+</mapper>

@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="system.index">
+
+    <select id="cxhzsj" parameterType="com.ylz.yx.pay.index.model.QueryParam" resultType="java.util.Map">
+        select sum(decode(ywlx00, '充值', ptje00, 0)) - sum(decode(ywlx00, '退款', ptje00, 0)) "jyzje0",
+               sum(decode(ywlx00, '充值', ptje00, 0))                                        "czzje0",
+               sum(decode(ywlx00, '充值', ptbs00, 0))                                        "czzbs0",
+               sum(decode(ywlx00, '退款', ptje00, 0))                                        "tkzje0",
+               sum(decode(ywlx00, '退款', ptbs00, 0))                                        "tkzbs0"
+        from (select '充值' ywlx00, sum(zfje00 / 100) ptje00, count(*) ptbs00
+              from PAY_ZFDD00
+              where to_char(ddcjsj, 'yyyy-MM-dd') between #{ksrq00} and #{jsrq00}
+                and ddzt00 in ('2', '5')
+              union all
+              select '退款' ywlx00, sum(tkje00 / 100) ptje00, count(*) ptbs00
+              from PAY_TKDD00
+              where to_char(ddcjsj, 'yyyy-MM-dd') between #{ksrq00} and #{jsrq00}
+                and tkzt00 = '2'
+             )
+    </select>
+
+    <select id="cxmrsj" parameterType="com.ylz.yx.pay.index.model.QueryParam" resultType="java.util.Map">
+        select tjrq00,
+               sum(decode(ddlx00, '01', ptje00, 0)) "mzje00",
+               sum(decode(ddlx00, '01', ptbs00, 0)) "mzbs00",
+               sum(decode(ddlx00, '02', ptje00, 0)) "zyje00",
+               sum(decode(ddlx00, '02', ptbs00, 0)) "zybs00"
+        from (select to_char(ddcjsj, 'yyyy-MM-dd') tjrq00, ddlx00, sum(zfje00 / 100) ptje00, count(*) ptbs00
+              from PAY_ZFDD00
+              where to_char(ddcjsj, 'yyyy-MM-dd') between #{ksrq00} and #{jsrq00}
+                and ddzt00 in ('2', '5')
+              group by to_char(ddcjsj, 'yyyy-MM-dd'), ddlx00
+              union all
+              select to_char(a.ddcjsj, 'yyyy-MM-dd') tjrq00, b.ddlx00, 0-sum(a.tkje00 / 100) ptje00, count(*) ptbs00
+              from PAY_TKDD00 A,
+                   PAY_ZFDD00 B
+              where a.yxtddh = b.xtddh0
+                and to_char(a.ddcjsj, 'yyyy-MM-dd') between #{ksrq00} and #{jsrq00}
+                and a.tkzt00 = '2'
+              group by to_char(a.ddcjsj, 'yyyy-MM-dd'), b.ddlx00
+             )
+        group by tjrq00
+        order by tjrq00
+    </select>
+
+    <select id="fwqdsr" parameterType="com.ylz.yx.pay.index.model.QueryParam" resultType="java.util.Map">
+        select max(b.qdmc00) "qdmc00", sum(ptje00) "je0000", sum(ptbs00) "bs0000"
+        from (select fwqdid, sum(zfje00 / 100) ptje00, count(*) ptbs00
+              from PAY_ZFDD00
+              where to_char(ddcjsj, 'yyyy-MM-dd') between #{ksrq00} and #{jsrq00}
+                and ddzt00 in ('2', '5')
+              group by fwqdid
+              union all
+              select fwqdid, 0-sum(tkje00 / 100) ptje00, count(*) ptbs00
+              from PAY_TKDD00
+              where to_char(ddcjsj, 'yyyy-MM-dd') between #{ksrq00} and #{jsrq00}
+                and tkzt00 = '2'
+              group by fwqdid) a,
+             PAY_FWQD00 b
+        where a.fwqdid = b.id0000
+        group by a.fwqdid
+    </select>
+
+    <select id="zfqdsr" parameterType="com.ylz.yx.pay.index.model.QueryParam" resultType="java.util.Map">
+        select max(b.qdmc00) "qdmc00", sum(ptje00) "je0000", sum(ptbs00) "bs0000"
+        from (select fwqdid, zfqd00, sum(zfje00 / 100) ptje00, count(*) ptbs00
+              from PAY_ZFDD00
+              where to_char(ddcjsj, 'yyyy-MM-dd') between #{ksrq00} and #{jsrq00}
+                and ddzt00 in ('2', '5')
+              group by fwqdid, zfqd00
+              union all
+              select fwqdid, zfqd00, 0-sum(tkje00 / 100) ptje00, count(*) ptbs00
+              from PAY_TKDD00
+              where to_char(ddcjsj, 'yyyy-MM-dd') between #{ksrq00} and #{jsrq00}
+                and tkzt00 = '2'
+              group by fwqdid, zfqd00) a,
+             PAY_ZFQD00 b,
+             PAY_FWZFGX c
+        where a.fwqdid = c.fwqdid
+          and c.zfqdid = b.id0000
+          and a.zfqd00 = b.qdbm00
+        group by a.zfqd00
+    </select>
+
+
+</mapper>

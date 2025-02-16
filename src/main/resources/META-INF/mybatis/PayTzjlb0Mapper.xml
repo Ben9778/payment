@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="pay.tzjlb0">
+  <resultMap id="BaseResultMap" type="com.ylz.yx.pay.core.entity.PayTzjlb0">
+    <id column="ID0000" jdbcType="VARCHAR" property="id0000" />
+    <result column="XTDDH0" jdbcType="VARCHAR" property="xtddh0" />
+    <result column="DDLX00" jdbcType="VARCHAR" property="ddlx00" />
+    <result column="FWDDH0" jdbcType="VARCHAR" property="fwddh0" />
+    <result column="FWQDID" jdbcType="VARCHAR" property="fwqdid" />
+    <result column="YBTZDZ" jdbcType="VARCHAR" property="ybtzdz" />
+    <result column="TZYXJG" jdbcType="VARCHAR" property="tzyxjg" />
+    <result column="TZCS00" jdbcType="NUMERIC" property="tzcs00" />
+    <result column="ZDTZCS" jdbcType="NUMERIC" property="zdtzcs" />
+    <result column="TZZT00" jdbcType="VARCHAR" property="tzzt00" />
+    <result column="ZHTZSJ" jdbcType="TIMESTAMP" property="zhtzsj" />
+    <result column="CJSJ00" jdbcType="TIMESTAMP" property="cjsj00" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ID0000, XTDDH0, DDLX00, FWDDH0, FWQDID, YBTZDZ, TZYXJG, TZCS00, ZDTZCS, TZZT00, ZHTZSJ, 
+    CJSJ00
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from PAY_TZJLB0
+    where ID0000 = #{id0000,jdbcType=VARCHAR}
+  </select>
+
+  <select id="selectByOrderAndType" parameterType="com.ylz.yx.pay.core.entity.PayTzjlb0" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from PAY_TZJLB0
+    where XTDDH0 = #{xtddh0,jdbcType=VARCHAR}
+    and DDLX00 = #{ddlx00,jdbcType=VARCHAR}
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from PAY_TZJLB0
+    where ID0000 = #{id0000,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.ylz.yx.pay.core.entity.PayTzjlb0">
+    insert into PAY_TZJLB0 (ID0000, XTDDH0, DDLX00, 
+      FWDDH0, FWQDID, YBTZDZ, 
+      TZYXJG, TZCS00, ZDTZCS, 
+      TZZT00, ZHTZSJ, CJSJ00)
+    values (#{id0000,jdbcType=VARCHAR}, #{xtddh0,jdbcType=VARCHAR}, #{ddlx00,jdbcType=VARCHAR}, 
+      #{fwddh0,jdbcType=VARCHAR}, #{fwqdid,jdbcType=VARCHAR}, #{ybtzdz,jdbcType=VARCHAR}, 
+      #{tzyxjg,jdbcType=VARCHAR}, #{tzcs00,jdbcType=NUMERIC}, #{zdtzcs,jdbcType=NUMERIC}, 
+      #{tzzt00,jdbcType=VARCHAR}, #{zhtzsj,jdbcType=TIMESTAMP}, #{cjsj00,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ylz.yx.pay.core.entity.PayTzjlb0">
+    insert into PAY_TZJLB0
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id0000 != null">
+        ID0000,
+      </if>
+      <if test="xtddh0 != null">
+        XTDDH0,
+      </if>
+      <if test="ddlx00 != null">
+        DDLX00,
+      </if>
+      <if test="fwddh0 != null">
+        FWDDH0,
+      </if>
+      <if test="fwqdid != null">
+        FWQDID,
+      </if>
+      <if test="ybtzdz != null">
+        YBTZDZ,
+      </if>
+      <if test="tzyxjg != null">
+        TZYXJG,
+      </if>
+      <if test="tzcs00 != null">
+        TZCS00,
+      </if>
+      <if test="zdtzcs != null">
+        ZDTZCS,
+      </if>
+      <if test="tzzt00 != null">
+        TZZT00,
+      </if>
+      <if test="zhtzsj != null">
+        ZHTZSJ,
+      </if>
+      <if test="cjsj00 != null">
+        CJSJ00,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id0000 != null">
+        #{id0000,jdbcType=VARCHAR},
+      </if>
+      <if test="xtddh0 != null">
+        #{xtddh0,jdbcType=VARCHAR},
+      </if>
+      <if test="ddlx00 != null">
+        #{ddlx00,jdbcType=VARCHAR},
+      </if>
+      <if test="fwddh0 != null">
+        #{fwddh0,jdbcType=VARCHAR},
+      </if>
+      <if test="fwqdid != null">
+        #{fwqdid,jdbcType=VARCHAR},
+      </if>
+      <if test="ybtzdz != null">
+        #{ybtzdz,jdbcType=VARCHAR},
+      </if>
+      <if test="tzyxjg != null">
+        #{tzyxjg,jdbcType=VARCHAR},
+      </if>
+      <if test="tzcs00 != null">
+        #{tzcs00,jdbcType=NUMERIC},
+      </if>
+      <if test="zdtzcs != null">
+        #{zdtzcs,jdbcType=NUMERIC},
+      </if>
+      <if test="tzzt00 != null">
+        #{tzzt00,jdbcType=VARCHAR},
+      </if>
+      <if test="zhtzsj != null">
+        #{zhtzsj,jdbcType=TIMESTAMP},
+      </if>
+      <if test="cjsj00 != null">
+        #{cjsj00,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ylz.yx.pay.core.entity.PayTzjlb0">
+    update PAY_TZJLB0
+    <set>
+      <if test="xtddh0 != null">
+        XTDDH0 = #{xtddh0,jdbcType=VARCHAR},
+      </if>
+      <if test="ddlx00 != null">
+        DDLX00 = #{ddlx00,jdbcType=VARCHAR},
+      </if>
+      <if test="fwddh0 != null">
+        FWDDH0 = #{fwddh0,jdbcType=VARCHAR},
+      </if>
+      <if test="fwqdid != null">
+        FWQDID = #{fwqdid,jdbcType=VARCHAR},
+      </if>
+      <if test="ybtzdz != null">
+        YBTZDZ = #{ybtzdz,jdbcType=VARCHAR},
+      </if>
+      <if test="tzyxjg != null">
+        TZYXJG = #{tzyxjg,jdbcType=VARCHAR},
+      </if>
+      <if test="tzcs00 != null">
+        TZCS00 = #{tzcs00,jdbcType=NUMERIC},
+      </if>
+      <if test="zdtzcs != null">
+        ZDTZCS = #{zdtzcs,jdbcType=NUMERIC},
+      </if>
+      <if test="tzzt00 != null">
+        TZZT00 = #{tzzt00,jdbcType=VARCHAR},
+      </if>
+      <if test="zhtzsj != null">
+        ZHTZSJ = #{zhtzsj,jdbcType=TIMESTAMP},
+      </if>
+      <if test="cjsj00 != null">
+        CJSJ00 = #{cjsj00,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where ID0000 = #{id0000,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ylz.yx.pay.core.entity.PayTzjlb0">
+    update PAY_TZJLB0
+    set XTDDH0 = #{xtddh0,jdbcType=VARCHAR},
+      DDLX00 = #{ddlx00,jdbcType=VARCHAR},
+      FWDDH0 = #{fwddh0,jdbcType=VARCHAR},
+      FWQDID = #{fwqdid,jdbcType=VARCHAR},
+      YBTZDZ = #{ybtzdz,jdbcType=VARCHAR},
+      TZYXJG = #{tzyxjg,jdbcType=VARCHAR},
+      TZCS00 = #{tzcs00,jdbcType=NUMERIC},
+      ZDTZCS = #{zdtzcs,jdbcType=NUMERIC},
+      TZZT00 = #{tzzt00,jdbcType=VARCHAR},
+      ZHTZSJ = #{zhtzsj,jdbcType=TIMESTAMP},
+      CJSJ00 = #{cjsj00,jdbcType=TIMESTAMP}
+    where ID0000 = #{id0000,jdbcType=VARCHAR}
+  </update>
+
+  <update id="updateNotifyResult" parameterType="com.ylz.yx.pay.core.entity.PayTzjlb0">
+    update PAY_TZJLB0 set TZYXJG = #{tzyxjg,jdbcType=VARCHAR},
+                          TZCS00 = TZCS00 + 1,
+                          TZZT00 = #{tzzt00,jdbcType=VARCHAR},
+                          ZHTZSJ = sysdate
+    where ID0000 = #{id0000,jdbcType=VARCHAR}
+
+  </update>
+</mapper>

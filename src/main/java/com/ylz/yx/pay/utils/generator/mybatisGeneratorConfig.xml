@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+
+    <context id="infoGuardian">
+        <commentGenerator type="com.ylz.yx.pay.utils.generator.MybatisCommentGenerator"></commentGenerator>
+
+        <!--数据库连接配置-->
+        <jdbcConnection driverClass="oracle.jdbc.driver.OracleDriver" connectionURL="jdbc:oracle:thin:@192.168.100.37:1521/htbaseemr" userId="TS_YLZ_PAY" password="YlzPay">
+            <!-- 注解生成配置 -->
+            <property name="remarksReporting" value="true"></property>
+        </jdbcConnection>
+
+        <javaTypeResolver>
+            <property name="forceBigDecimals" value="false" />
+        </javaTypeResolver>
+
+        <!--model生成地址-->
+        <javaModelGenerator targetPackage="com.ylz.yx.pay.system.approval.model" targetProject="./src/main/java">
+            <property name="enableSubPackages" value="true" />
+            <property name="trimStrings" value="true" />
+        </javaModelGenerator>
+
+        <!--xml 生成地址-->
+        <sqlMapGenerator targetPackage="META-INF/mybatis" targetProject="./src/main/resources">
+            <property name="enableSubPackages" value="true" />
+        </sqlMapGenerator>
+
+        <!--表名和类名配置，可配置多个-->
+        <table tableName="PAY_SPJLB0"  domainObjectName="PaySpjlb0"
+               enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false">
+        </table>
+        <table tableName="PAY_SPBZB0"  domainObjectName="PaySpbzb0"
+               enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false">
+        </table>
+    </context>
+
+</generatorConfiguration>

@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="pay.fwzfgx">
+  <resultMap id="BaseResultMap" type="com.ylz.yx.pay.core.entity.PayFwzfgx">
+    <id column="ID0000" jdbcType="VARCHAR" property="id0000" />
+    <result column="FWQDID" jdbcType="VARCHAR" property="fwqdid" />
+    <result column="ZFQDID" jdbcType="VARCHAR" property="zfqdid" />
+    <result column="ZFFS00" jdbcType="CLOB" property="zffs00" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ID0000, FWQDID, ZFQDID, ZFFS00
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from PAY_FWZFGX
+    where ID0000 = #{id0000,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from PAY_FWZFGX
+    where FWQDID = #{id0000,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.ylz.yx.pay.core.entity.PayFwzfgx">
+    insert into PAY_FWZFGX (ID0000, FWQDID, ZFQDID, 
+      ZFFS00)
+    values (#{id0000,jdbcType=VARCHAR}, #{fwqdid,jdbcType=VARCHAR}, #{zfqdid,jdbcType=VARCHAR}, 
+      #{zffs00,jdbcType=CLOB})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ylz.yx.pay.core.entity.PayFwzfgx">
+    insert into PAY_FWZFGX
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id0000 != null">
+        ID0000,
+      </if>
+      <if test="fwqdid != null">
+        FWQDID,
+      </if>
+      <if test="zfqdid != null">
+        ZFQDID,
+      </if>
+      <if test="zffs00 != null">
+        ZFFS00,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id0000 != null">
+        #{id0000,jdbcType=VARCHAR},
+      </if>
+      <if test="fwqdid != null">
+        #{fwqdid,jdbcType=VARCHAR},
+      </if>
+      <if test="zfqdid != null">
+        #{zfqdid,jdbcType=VARCHAR},
+      </if>
+      <if test="zffs00 != null">
+        #{zffs00,jdbcType=CLOB},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ylz.yx.pay.core.entity.PayFwzfgx">
+    update PAY_FWZFGX
+    <set>
+      <if test="fwqdid != null">
+        FWQDID = #{fwqdid,jdbcType=VARCHAR},
+      </if>
+      <if test="zfqdid != null">
+        ZFQDID = #{zfqdid,jdbcType=VARCHAR},
+      </if>
+      <if test="zffs00 != null">
+        ZFFS00 = #{zffs00,jdbcType=CLOB},
+      </if>
+    </set>
+    where ID0000 = #{id0000,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.ylz.yx.pay.core.entity.PayFwzfgx">
+    update PAY_FWZFGX
+    set FWQDID = #{fwqdid,jdbcType=VARCHAR},
+      ZFQDID = #{zfqdid,jdbcType=VARCHAR},
+      ZFFS00 = #{zffs00,jdbcType=CLOB}
+    where ID0000 = #{id0000,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ylz.yx.pay.core.entity.PayFwzfgx">
+    update PAY_FWZFGX
+    set FWQDID = #{fwqdid,jdbcType=VARCHAR},
+      ZFQDID = #{zfqdid,jdbcType=VARCHAR}
+    where ID0000 = #{id0000,jdbcType=VARCHAR}
+  </update>
+
+  <select id="selectByFwqdid" parameterType="java.lang.String" resultType="java.lang.String">
+    select REPLACE(RTRIM(XMLAGG(XMLPARSE(CONTENT zffs00 || '、' WELLFORMED)).GETCLOBVAL(),'、'),']、[',', ')
+    from PAY_FWZFGX
+    where fwqdid = #{id0000}
+  </select>
+
+  <select id="selectByFwqdidAndZffs00" parameterType="java.util.Map" resultMap="BaseResultMap">
+    select <include refid="Base_Column_List" />
+    from PAY_FWZFGX
+    where fwqdid = #{fwqdid,jdbcType=VARCHAR}
+      and instr(zffs00, #{zffs00,jdbcType=VARCHAR}) > 0
+  </select>
+</mapper>

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http#{//mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="system.ptjsb000">
+
+    <select id="getRoleList" resultType="com.ylz.yx.pay.system.role.model.Ptjsb000" parameterType="java.util.Map">
+        select jsid00, jsmc00, jsdesc, sfyx00, jslx00, to_char(cjrq00, 'yyyy-MM-dd hh24:mi:ss') cjrq00,
+        (select zwxm00 from bm_ygbm00 where ygbh00 = a.cjr000) cjrxm0
+        from pt_jsb000 a
+        <where>
+            <if test="jsmc00 != null and jsmc00 != ''">
+                and instr(jsmc00||jsid00,#{jsmc00})>0
+            </if>
+            <if test="sfyx00 != null and sfyx00 != ''">
+                and sfyx00 = #{sfyx00}
+            </if>
+        </where>
+        order by jsid00
+    </select>
+
+    <select id="countRoleList" resultType="java.lang.Integer" parameterType="java.util.Map">
+        select count(*)
+        from pt_jsb000 a
+        <where>
+            <if test="jsmc00 != null and jsmc00 != ''">
+                and instr(jsmc00||jsid00,#{jsmc00})>0
+            </if>
+            <if test="sfyx00 != null and sfyx00 != ''">
+                and sfyx00 = #{sfyx00}
+            </if>
+        </where>
+    </select>
+
+    <select id="getRoleByJsmc00" resultType="com.ylz.yx.pay.system.role.model.Ptjsb000" parameterType="java.util.Map">
+        select jsid00, jsmc00, jsdesc, sfyx00, jslx00, cjrq00,
+        (select zwxm00 from bm_ygbm00 where ygbh00 = a.cjr000) cjrxm0
+        from pt_jsb000 a
+        where jsmc00 = #{jsmc00,jdbcType=VARCHAR}
+        order by jsid00
+    </select>
+
+    <insert id="insertPtjsb000" parameterType="java.util.Map">
+        insert into pt_jsb000 (jsid00, jsmc00, cjr000, cjrq00, sfyx00)
+        values (#{jsid00}, #{jsmc00,jdbcType=VARCHAR}, #{cjr000}, sysdate, #{sfyx00,jdbcType=CHAR})
+    </insert>
+
+    <update id="updatePtjsb000" parameterType="java.util.Map">
+        update pt_jsb000
+        <set>
+            <if test="jsmc00 != null and jsmc00 != ''">
+                jsmc00 = #{jsmc00},
+            </if>
+            <if test="sfyx00 != null and sfyx00 != ''">
+                sfyx00 = #{sfyx00},
+            </if>
+        </set>
+        where jsid00 = #{jsid00}
+    </update>
+
+    <delete id="deletePtjsb000" parameterType="java.lang.String">
+        delete from pt_jsb000 where jsid00 = #{jsid00}
+    </delete>
+
+    <select id="getSeqNum" resultType="java.lang.Integer">
+        select SQ_PT_JSB000_JSID00.NEXTVAL from dual
+    </select>
+</mapper>

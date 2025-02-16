@@ -1,0 +1,453 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="pay.tkdd00">
+  <resultMap id="BaseResultMap" type="com.ylz.yx.pay.core.entity.PayTkdd00">
+    <id column="ID0000" jdbcType="VARCHAR" property="id0000" />
+    <result column="FWQDID" jdbcType="VARCHAR" property="fwqdid" />
+    <result column="XTDDH0" jdbcType="VARCHAR" property="xtddh0" />
+    <result column="FWDDH0" jdbcType="VARCHAR" property="fwddh0" />
+    <result column="ZFDDH0" jdbcType="VARCHAR" property="zfddh0" />
+    <result column="YXTDDH" jdbcType="VARCHAR" property="yxtddh" />
+    <result column="YFWDDH" jdbcType="VARCHAR" property="yfwddh" />
+    <result column="YZFDDH" jdbcType="VARCHAR" property="yzfddh" />
+    <result column="TKJE00" jdbcType="NUMERIC" property="tkje00" />
+    <result column="TKZT00" jdbcType="VARCHAR" property="tkzt00" />
+    <result column="TKYY00" jdbcType="VARCHAR" property="tkyy00" />
+    <result column="DDCJSJ" jdbcType="TIMESTAMP" property="ddcjsj" />
+    <result column="TKCGSJ" jdbcType="TIMESTAMP" property="tkcgsj" />
+    <result column="YBTZDZ" jdbcType="VARCHAR" property="ybtzdz" />
+    <result column="QDCS00" jdbcType="VARCHAR" property="qdcs00" />
+    <result column="KZCS00" jdbcType="VARCHAR" property="kzcs00" />
+    <result column="CZYID0" jdbcType="VARCHAR" property="czyid0" />
+    <result column="CZYXM0" jdbcType="VARCHAR" property="czyxm0" />
+    <result column="ZFCWM0" jdbcType="VARCHAR" property="zfcwm0" />
+    <result column="ZFCWMS" jdbcType="VARCHAR" property="zfcwms" />
+    <result column="TZZT00" jdbcType="VARCHAR" property="tzzt00" />
+    <result column="ZFQD00" jdbcType="VARCHAR" property="zfqd00" />
+    <result column="ZFFS00" jdbcType="VARCHAR" property="zffs00" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ID0000, FWQDID, XTDDH0, FWDDH0, ZFDDH0, YXTDDH, YFWDDH, YZFDDH, TKJE00, TKZT00, TKYY00, 
+    DDCJSJ, TKCGSJ, YBTZDZ, QDCS00, KZCS00, CZYID0, CZYXM0, ZFCWM0, ZFCWMS, TZZT00, ZFQD00, ZFFS00
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from PAY_TKDD00
+    where ID0000 = #{id0000,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from PAY_TKDD00
+    where ID0000 = #{id0000,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.ylz.yx.pay.core.entity.PayTkdd00">
+    insert into PAY_TKDD00 (ID0000, FWQDID, XTDDH0, 
+      FWDDH0, ZFDDH0, YXTDDH, 
+      YFWDDH, YZFDDH, TKJE00, 
+      TKZT00, TKYY00, DDCJSJ, 
+      TKCGSJ, YBTZDZ, KZCS00,
+      CZYID0, CZYXM0, ZFCWM0,
+      ZFCWMS, TZZT00, ZFQD00,
+      ZFFS00)
+    values (#{id0000,jdbcType=VARCHAR}, #{fwqdid,jdbcType=VARCHAR}, #{xtddh0,jdbcType=VARCHAR}, 
+      #{fwddh0,jdbcType=VARCHAR}, #{zfddh0,jdbcType=VARCHAR}, #{yxtddh,jdbcType=VARCHAR}, 
+      #{yfwddh,jdbcType=VARCHAR}, #{yzfddh,jdbcType=VARCHAR}, #{tkje00,jdbcType=NUMERIC}, 
+      #{tkzt00,jdbcType=VARCHAR}, #{tkyy00,jdbcType=VARCHAR}, #{ddcjsj,jdbcType=TIMESTAMP}, 
+      #{tkcgsj,jdbcType=TIMESTAMP}, #{ybtzdz,jdbcType=VARCHAR}, #{kzcs00,jdbcType=VARCHAR},
+      #{czyid0,jdbcType=VARCHAR}, #{czyxm0,jdbcType=VARCHAR}, #{zfcwm0,jdbcType=VARCHAR},
+      #{zfcwms,jdbcType=VARCHAR}, #{tzzt00,jdbcType=VARCHAR}, #{zfqd00,jdbcType=VARCHAR},
+      #{zffs00,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ylz.yx.pay.core.entity.PayTkdd00">
+    insert into PAY_TKDD00
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id0000 != null">
+        ID0000,
+      </if>
+      <if test="fwqdid != null">
+        FWQDID,
+      </if>
+      <if test="xtddh0 != null">
+        XTDDH0,
+      </if>
+      <if test="fwddh0 != null">
+        FWDDH0,
+      </if>
+      <if test="zfddh0 != null">
+        ZFDDH0,
+      </if>
+      <if test="yxtddh != null">
+        YXTDDH,
+      </if>
+      <if test="yfwddh != null">
+        YFWDDH,
+      </if>
+      <if test="yzfddh != null">
+        YZFDDH,
+      </if>
+      <if test="tkje00 != null">
+        TKJE00,
+      </if>
+      <if test="tkzt00 != null">
+        TKZT00,
+      </if>
+      <if test="tkyy00 != null">
+        TKYY00,
+      </if>
+      <if test="ddcjsj != null">
+        DDCJSJ,
+      </if>
+      <if test="tkcgsj != null">
+        TKCGSJ,
+      </if>
+      <if test="ybtzdz != null">
+        YBTZDZ,
+      </if>
+      <if test="qdcs00 != null">
+        QDCS00,
+      </if>
+      <if test="kzcs00 != null">
+        KZCS00,
+      </if>
+      <if test="czyid0 != null">
+        CZYID0,
+      </if>
+      <if test="czyxm0 != null">
+        CZYXM0,
+      </if>
+      <if test="zfcwm0 != null">
+        ZFCWM0,
+      </if>
+      <if test="zfcwms != null">
+        ZFCWMS,
+      </if>
+      <if test="tzzt00 != null">
+        TZZT00,
+      </if>
+      <if test="zfqd00 != null">
+        ZFQD00,
+      </if>
+      <if test="zffs00 != null">
+        ZFFS00,
+      </if>
+      <if test="yyid00 != null">
+        YYID00,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id0000 != null">
+        #{id0000,jdbcType=VARCHAR},
+      </if>
+      <if test="fwqdid != null">
+        #{fwqdid,jdbcType=VARCHAR},
+      </if>
+      <if test="xtddh0 != null">
+        #{xtddh0,jdbcType=VARCHAR},
+      </if>
+      <if test="fwddh0 != null">
+        #{fwddh0,jdbcType=VARCHAR},
+      </if>
+      <if test="zfddh0 != null">
+        #{zfddh0,jdbcType=VARCHAR},
+      </if>
+      <if test="yxtddh != null">
+        #{yxtddh,jdbcType=VARCHAR},
+      </if>
+      <if test="yfwddh != null">
+        #{yfwddh,jdbcType=VARCHAR},
+      </if>
+      <if test="yzfddh != null">
+        #{yzfddh,jdbcType=VARCHAR},
+      </if>
+      <if test="tkje00 != null">
+        #{tkje00,jdbcType=NUMERIC},
+      </if>
+      <if test="tkzt00 != null">
+        #{tkzt00,jdbcType=VARCHAR},
+      </if>
+      <if test="tkyy00 != null">
+        #{tkyy00,jdbcType=VARCHAR},
+      </if>
+      <if test="ddcjsj != null">
+        #{ddcjsj,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tkcgsj != null">
+        #{tkcgsj,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ybtzdz != null">
+        #{ybtzdz,jdbcType=VARCHAR},
+      </if>
+      <if test="qdcs00 != null">
+        #{qdcs00,jdbcType=VARCHAR},
+      </if>
+      <if test="kzcs00 != null">
+        #{kzcs00,jdbcType=VARCHAR},
+      </if>
+      <if test="czyid0 != null">
+        #{czyid0,jdbcType=VARCHAR},
+      </if>
+      <if test="czyxm0 != null">
+        #{czyxm0,jdbcType=VARCHAR},
+      </if>
+      <if test="zfcwm0 != null">
+        #{zfcwm0,jdbcType=VARCHAR},
+      </if>
+      <if test="zfcwms != null">
+        #{zfcwms,jdbcType=VARCHAR},
+      </if>
+      <if test="tzzt00 != null">
+        #{tzzt00,jdbcType=VARCHAR},
+      </if>
+      <if test="zfqd00 != null">
+        #{zfqd00,jdbcType=VARCHAR},
+      </if>
+      <if test="zffs00 != null">
+        #{zffs00,jdbcType=VARCHAR},
+      </if>
+      <if test="yyid00 != null">
+        #{yyid00,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ylz.yx.pay.core.entity.PayTkdd00">
+    update PAY_TKDD00
+    <set>
+      <if test="fwqdid != null">
+        FWQDID = #{fwqdid,jdbcType=VARCHAR},
+      </if>
+      <if test="xtddh0 != null">
+        XTDDH0 = #{xtddh0,jdbcType=VARCHAR},
+      </if>
+      <if test="fwddh0 != null">
+        FWDDH0 = #{fwddh0,jdbcType=VARCHAR},
+      </if>
+      <if test="zfddh0 != null">
+        ZFDDH0 = #{zfddh0,jdbcType=VARCHAR},
+      </if>
+      <if test="yxtddh != null">
+        YXTDDH = #{yxtddh,jdbcType=VARCHAR},
+      </if>
+      <if test="yfwddh != null">
+        YFWDDH = #{yfwddh,jdbcType=VARCHAR},
+      </if>
+      <if test="yzfddh != null">
+        YZFDDH = #{yzfddh,jdbcType=VARCHAR},
+      </if>
+      <if test="tkje00 != null">
+        TKJE00 = #{tkje00,jdbcType=NUMERIC},
+      </if>
+      <if test="tkzt00 != null">
+        TKZT00 = #{tkzt00,jdbcType=VARCHAR},
+      </if>
+      <if test="tkyy00 != null">
+        TKYY00 = #{tkyy00,jdbcType=VARCHAR},
+      </if>
+      <if test="ddcjsj != null">
+        DDCJSJ = #{ddcjsj,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tkcgsj != null">
+        TKCGSJ = #{tkcgsj,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ybtzdz != null">
+        YBTZDZ = #{ybtzdz,jdbcType=VARCHAR},
+      </if>
+      <if test="kzcs00 != null">
+        KZCS00 = #{kzcs00,jdbcType=VARCHAR},
+      </if>
+      <if test="czyid0 != null">
+        CZYID0 = #{czyid0,jdbcType=VARCHAR},
+      </if>
+      <if test="czyxm0 != null">
+        CZYXM0 = #{czyxm0,jdbcType=VARCHAR},
+      </if>
+      <if test="zfcwm0 != null">
+        ZFCWM0 = #{zfcwm0,jdbcType=VARCHAR},
+      </if>
+      <if test="zfcwms != null">
+        ZFCWMS = #{zfcwms,jdbcType=VARCHAR},
+      </if>
+      <if test="tzzt00 != null">
+        TZZT00 = #{tzzt00,jdbcType=VARCHAR},
+      </if>
+      <if test="zfqd00 != null">
+        ZFQD00 = #{zfqd00,jdbcType=VARCHAR},
+      </if>
+      <if test="zffs00 != null">
+        ZFFS00 = #{zffs00,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID0000 = #{id0000,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ylz.yx.pay.core.entity.PayTkdd00">
+    update PAY_TKDD00
+    set FWQDID = #{fwqdid,jdbcType=VARCHAR},
+      XTDDH0 = #{xtddh0,jdbcType=VARCHAR},
+      FWDDH0 = #{fwddh0,jdbcType=VARCHAR},
+      ZFDDH0 = #{zfddh0,jdbcType=VARCHAR},
+      YXTDDH = #{yxtddh,jdbcType=VARCHAR},
+      YFWDDH = #{yfwddh,jdbcType=VARCHAR},
+      YZFDDH = #{yzfddh,jdbcType=VARCHAR},
+      TKJE00 = #{tkje00,jdbcType=NUMERIC},
+      TKZT00 = #{tkzt00,jdbcType=VARCHAR},
+      TKYY00 = #{tkyy00,jdbcType=VARCHAR},
+      DDCJSJ = #{ddcjsj,jdbcType=TIMESTAMP},
+      TKCGSJ = #{tkcgsj,jdbcType=TIMESTAMP},
+      YBTZDZ = #{ybtzdz,jdbcType=VARCHAR},
+      KZCS00 = #{kzcs00,jdbcType=VARCHAR},
+      CZYID0 = #{czyid0,jdbcType=VARCHAR},
+      CZYXM0 = #{czyxm0,jdbcType=VARCHAR},
+      ZFCWM0 = #{zfcwm0,jdbcType=VARCHAR},
+      ZFCWMS = #{zfcwms,jdbcType=VARCHAR},
+      TZZT00 = #{tzzt00,jdbcType=VARCHAR},
+      ZFQD00 = #{zfqd00,jdbcType=VARCHAR},
+      ZFFS00 = #{zffs00,jdbcType=VARCHAR}
+    where ID0000 = #{id0000,jdbcType=VARCHAR}
+  </update>
+
+  <select id="selectByXtddh0" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from PAY_TKDD00
+    where XTDDH0 = #{id0000,jdbcType=VARCHAR} and tkzt00 != 4
+  </select>
+
+  <select id="selectByFwddh0" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from PAY_TKDD00
+    where FWDDH0 = #{id0000,jdbcType=VARCHAR}
+  </select>
+
+  <update id="updateByXtddh0" parameterType="com.ylz.yx.pay.order.refund.model.UdpPayTkdd00Param">
+    update PAY_TKDD00
+    <set>
+      <if test="zfddh0 != null">
+        ZFDDH0 = #{zfddh0,jdbcType=VARCHAR},
+      </if>
+      <if test="tkzt00 != null">
+        TKZT00 = #{tkzt00,jdbcType=VARCHAR},
+      </if>
+      <if test="tkcgsj != null">
+        TKCGSJ = #{tkcgsj,jdbcType=TIMESTAMP},
+      </if>
+      <if test="zfcwm0 != null">
+        ZFCWM0 = #{zfcwm0,jdbcType=VARCHAR},
+      </if>
+      <if test="zfcwms != null">
+        ZFCWMS = #{zfcwms,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where XTDDH0 = #{xtddh0,jdbcType=VARCHAR} and TKZT00 = #{ytkzt0,jdbcType=VARCHAR}
+  </update>
+
+  <select id="sumSuccessRefundAmount" resultType="Long">
+    select nvl(sum(tkje00), 0) from PAY_TKDD00
+    where yxtddh = #{xtddh0} and tkzt00 = 2
+  </select>
+
+  <select id="selectIngList" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from PAY_TKDD00
+    where TKZT00 = '1'
+  </select>
+
+  <select id="selectIngCount" resultType="java.lang.Integer">
+    select count(*)
+    from PAY_TKDD00
+    where yxtddh = #{xtddh0} and tkzt00 = 1
+  </select>
+
+  <select id="selectCountByFwddh0" resultType="java.lang.Integer">
+    select count(*)
+    from PAY_TKDD00
+    where fwddh0 = #{fwddh0} and tkzt00 in (0,1)
+  </select>
+
+  <select id="selectList" parameterType="java.util.Map" resultType="com.ylz.yx.pay.order.refund.model.PayTkdd00RS">
+    select A.ID0000, A.FWQDID, B.QDMC00 FWQDMC, A.XTDDH0, A.FWDDH0, A.ZFDDH0, A.YXTDDH, A.YFWDDH, A.YZFDDH,
+           C.HZXM00, C.HZSJH0, C.KHZYH0, C.HZSFZH, C.DDLX00, A.ZFQD00, A.ZFFS00, C.ZFJE00/100 ZFJE00,
+           A.TKJE00/100 TKJE00, A.TKZT00, A.TKYY00, TO_CHAR(A.DDCJSJ,'yyyy-MM-dd hh24:mi:ss') DDCJSJ,
+           TO_CHAR(C.DDZFSJ,'yyyy-MM-dd hh24:mi:ss') DDZFSJ, TO_CHAR(A.TKCGSJ,'yyyy-MM-dd hh24:mi:ss') TKCGSJ,
+           A.YBTZDZ, A.TZZT00, A.KZCS00, A.CZYID0, A.CZYXM0, A.ZFCWM0, A.ZFCWMS
+    from PAY_TKDD00 A, PAY_FWQD00 B, PAY_ZFDD00 C
+    where A.FWQDID = B.ID0000
+    and A.YXTDDH = C.XTDDH0
+    <if test="ksrq00 != null and ksrq00 != ''">
+      <![CDATA[
+            and a.ddcjsj >= to_date(#{ksrq00},'yyyy-MM-dd')
+        ]]>
+    </if>
+    <if test="jsrq00 != null and jsrq00 != ''">
+      <![CDATA[
+            and a.ddcjsj < to_date(#{jsrq00},'yyyy-MM-dd')+1
+        ]]>
+    </if>
+    <if test="content != null and content != ''">
+      and instr(a.xtddh0||c.hzxm00||c.khzyh0,#{content}) > 0
+    </if>
+    <if test="ddlx00 != null and ddlx00 != ''">
+      and c.ddlx00 = #{ddlx00}
+    </if>
+    <if test="fwqd00 != null and fwqd00 != ''">
+      and b.id0000 = #{fwqd00}
+    </if>
+    <if test="jyqd00 != null and jyqd00 != ''">
+      and c.zfqd00 = #{jyqd00}
+    </if>
+    <if test="ddzt00 != null and ddzt00 != ''">
+      and a.tkzt00 = #{ddzt00}
+    </if>
+    <if test="yylx00 != null and yylx00 != ''">
+      and b.yylx00 = #{yylx00}
+    </if>
+    order by a.ddcjsj desc
+  </select>
+
+  <select id="selectCountList" parameterType="java.util.Map" resultType="java.lang.Integer">
+    select count(*)
+    from PAY_TKDD00 A, PAY_FWQD00 B, PAY_ZFDD00 C
+    where A.FWQDID = B.ID0000
+    and A.YXTDDH = C.XTDDH0
+    <if test="ksrq00 != null and ksrq00 != ''">
+      <![CDATA[
+            and a.ddcjsj >= to_date(#{ksrq00},'yyyy-MM-dd')
+        ]]>
+    </if>
+    <if test="jsrq00 != null and jsrq00 != ''">
+      <![CDATA[
+            and a.ddcjsj < to_date(#{jsrq00},'yyyy-MM-dd')+1
+        ]]>
+    </if>
+    <if test="content != null and content != ''">
+      and instr(a.xtddh0||c.hzxm00||c.khzyh0,#{content}) > 0
+    </if>
+    <if test="ddlx00 != null and ddlx00 != ''">
+      and c.ddlx00 = #{ddlx00}
+    </if>
+    <if test="fwqd00 != null and fwqd00 != ''">
+      and b.id0000 = #{fwqd00}
+    </if>
+    <if test="jyqd00 != null and jyqd00 != ''">
+      and c.zfqd00 = #{jyqd00}
+    </if>
+    <if test="ddzt00 != null and ddzt00 != ''">
+      and a.tkzt00 = #{ddzt00}
+    </if>
+    <if test="yylx00 != null and yylx00 != ''">
+      and b.yylx00 = #{yylx00}
+    </if>
+  </select>
+
+  <select id="selectById0000" parameterType="java.lang.String" resultType="com.ylz.yx.pay.order.refund.model.PayTkdd00RS">
+    select A.ID0000, A.FWQDID, B.QDMC00 FWQDMC, A.XTDDH0, A.FWDDH0, A.ZFDDH0, A.YXTDDH, A.YFWDDH, A.YZFDDH,
+           C.HZXM00, C.HZSJH0, C.KHZYH0, C.HZSFZH, C.DDLX00, A.ZFQD00, A.ZFFS00, C.ZFJE00/100 ZFJE00,
+           A.TKJE00/100 TKJE00, A.TKZT00, A.TKYY00, TO_CHAR(A.DDCJSJ,'yyyy-MM-dd hh24:mi:ss') DDCJSJ,
+           TO_CHAR(C.DDZFSJ,'yyyy-MM-dd hh24:mi:ss') DDZFSJ, TO_CHAR(A.TKCGSJ,'yyyy-MM-dd hh24:mi:ss') TKCGSJ,
+           A.YBTZDZ, A.TZZT00, A.KZCS00, A.CZYID0, A.CZYXM0, A.ZFCWM0, A.ZFCWMS, C.DDMC00
+    from PAY_TKDD00 A, PAY_FWQD00 B, PAY_ZFDD00 C
+    where A.FWQDID = B.ID0000
+      and A.YXTDDH = C.XTDDH0
+      and A.ID0000 = #{id0000,jdbcType=VARCHAR}
+  </select>
+</mapper>

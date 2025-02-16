@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="system.bmygbm00">
+  <resultMap id="BaseResultMap" type="com.ylz.yx.pay.system.user.model.Bmygbm00">
+    <id column="YGBH00" jdbcType="NUMERIC" property="ygbh00" />
+    <result column="ZWXM00" jdbcType="VARCHAR" property="zwxm00" />
+    <result column="XB0000" jdbcType="VARCHAR" property="xb0000" />
+    <result column="XKH000" jdbcType="VARCHAR" property="xkh000" />
+    <result column="BMBH00" jdbcType="NUMERIC" property="bmbh00" />
+    <result column="CZBZ00" jdbcType="CHAR" property="czbz00" />
+    <result column="YSLB00" jdbcType="VARCHAR" property="yslb00" />
+    <result column="YHKL00" jdbcType="VARCHAR" property="yhkl00" />
+    <result column="YSZJHM" jdbcType="VARCHAR" property="yszjhm" />
+    <result column="SFZBH0" jdbcType="VARCHAR" property="sfzbh0" />
+    <result column="YGCSRQ" jdbcType="CHAR" property="ygcsrq" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    YGBH00, ZWXM00, XB0000, XKH000, BMBH00, CZBZ00, YSLB00, YHKL00, YSZJHM, SFZBH0, YGCSRQ
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from BM_YGBM00
+    where YGBH00 = #{ygbh00,jdbcType=NUMERIC}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from BM_YGBM00
+    where YGBH00 = #{ygbh00,jdbcType=NUMERIC}
+  </delete>
+  <insert id="insert" parameterType="com.ylz.yx.pay.system.user.model.Bmygbm00">
+    insert into BM_YGBM00 (YGBH00, ZWXM00, XB0000, 
+      XKH000, BMBH00, CZBZ00, 
+      YSLB00, YHKL00, YSZJHM, 
+      SFZBH0, YGCSRQ)
+    values (#{ygbh00,jdbcType=NUMERIC}, #{zwxm00,jdbcType=VARCHAR}, #{xb0000,jdbcType=VARCHAR}, 
+      #{xkh000,jdbcType=VARCHAR}, #{bmbh00,jdbcType=NUMERIC}, #{czbz00,jdbcType=CHAR}, 
+      #{yslb00,jdbcType=VARCHAR}, #{yhkl00,jdbcType=VARCHAR}, #{yszjhm,jdbcType=VARCHAR}, 
+      #{sfzbh0,jdbcType=VARCHAR}, #{ygcsrq,jdbcType=CHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ylz.yx.pay.system.user.model.Bmygbm00">
+    insert into BM_YGBM00
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="ygbh00 != null">
+        YGBH00,
+      </if>
+      <if test="zwxm00 != null">
+        ZWXM00,
+      </if>
+      <if test="xb0000 != null">
+        XB0000,
+      </if>
+      <if test="xkh000 != null">
+        XKH000,
+      </if>
+      <if test="bmbh00 != null">
+        BMBH00,
+      </if>
+      <if test="czbz00 != null">
+        CZBZ00,
+      </if>
+      <if test="yslb00 != null">
+        YSLB00,
+      </if>
+      <if test="yhkl00 != null">
+        YHKL00,
+      </if>
+      <if test="yszjhm != null">
+        YSZJHM,
+      </if>
+      <if test="sfzbh0 != null">
+        SFZBH0,
+      </if>
+      <if test="ygcsrq != null">
+        YGCSRQ,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="ygbh00 != null">
+        #{ygbh00,jdbcType=NUMERIC},
+      </if>
+      <if test="zwxm00 != null">
+        #{zwxm00,jdbcType=VARCHAR},
+      </if>
+      <if test="xb0000 != null">
+        #{xb0000,jdbcType=VARCHAR},
+      </if>
+      <if test="xkh000 != null">
+        #{xkh000,jdbcType=VARCHAR},
+      </if>
+      <if test="bmbh00 != null">
+        #{bmbh00,jdbcType=NUMERIC},
+      </if>
+      <if test="czbz00 != null">
+        #{czbz00,jdbcType=CHAR},
+      </if>
+      <if test="yslb00 != null">
+        #{yslb00,jdbcType=VARCHAR},
+      </if>
+      <if test="yhkl00 != null">
+        #{yhkl00,jdbcType=VARCHAR},
+      </if>
+      <if test="yszjhm != null">
+        #{yszjhm,jdbcType=VARCHAR},
+      </if>
+      <if test="sfzbh0 != null">
+        #{sfzbh0,jdbcType=VARCHAR},
+      </if>
+      <if test="ygcsrq != null">
+        #{ygcsrq,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ylz.yx.pay.system.user.model.Bmygbm00">
+    update BM_YGBM00
+    <set>
+      <if test="zwxm00 != null">
+        ZWXM00 = #{zwxm00,jdbcType=VARCHAR},
+      </if>
+      <if test="xb0000 != null">
+        XB0000 = #{xb0000,jdbcType=VARCHAR},
+      </if>
+      <if test="xkh000 != null">
+        XKH000 = #{xkh000,jdbcType=VARCHAR},
+      </if>
+      <if test="bmbh00 != null">
+        BMBH00 = #{bmbh00,jdbcType=NUMERIC},
+      </if>
+      <if test="czbz00 != null">
+        CZBZ00 = #{czbz00,jdbcType=CHAR},
+      </if>
+      <if test="yslb00 != null">
+        YSLB00 = #{yslb00,jdbcType=VARCHAR},
+      </if>
+      <if test="yhkl00 != null">
+        YHKL00 = #{yhkl00,jdbcType=VARCHAR},
+      </if>
+      <if test="yszjhm != null">
+        YSZJHM = #{yszjhm,jdbcType=VARCHAR},
+      </if>
+      <if test="sfzbh0 != null">
+        SFZBH0 = #{sfzbh0,jdbcType=VARCHAR},
+      </if>
+      <if test="ygcsrq != null">
+        YGCSRQ = #{ygcsrq,jdbcType=CHAR},
+      </if>
+    </set>
+    where YGBH00 = #{ygbh00,jdbcType=NUMERIC}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ylz.yx.pay.system.user.model.Bmygbm00">
+    update BM_YGBM00
+    set ZWXM00 = #{zwxm00,jdbcType=VARCHAR},
+      XB0000 = #{xb0000,jdbcType=VARCHAR},
+      XKH000 = #{xkh000,jdbcType=VARCHAR},
+      BMBH00 = #{bmbh00,jdbcType=NUMERIC},
+      CZBZ00 = #{czbz00,jdbcType=CHAR},
+      YSLB00 = #{yslb00,jdbcType=VARCHAR},
+      YHKL00 = #{yhkl00,jdbcType=VARCHAR},
+      YSZJHM = #{yszjhm,jdbcType=VARCHAR},
+      SFZBH0 = #{sfzbh0,jdbcType=VARCHAR},
+      YGCSRQ = #{ygcsrq,jdbcType=CHAR}
+    where YGBH00 = #{ygbh00,jdbcType=NUMERIC}
+  </update>
+
+  <select id="getUserInfo" resultType="java.util.Map"
+          parameterType="java.lang.String">
+    select a.ygbh00, a.zwxm00, a.yhkl00, b.jsid00, c.jslx00, a.czbz00
+    from bm_ygbm00 a, pt_jsygb0 b, pt_jsb000 c
+    where a.ygbh00 = b.ygbh00(+)
+      and b.jsid00 = c.jsid00(+)
+      and a.xkh000 = #{xkh000}
+  </select>
+
+  <select id="getUserInfoByYgbh00" resultType="java.util.Map"
+          parameterType="java.lang.String">
+    select a.ygbh00, a.zwxm00, a.yhkl00, b.jsid00, c.jslx00, a.czbz00
+    from bm_ygbm00 a, pt_jsygb0 b, pt_jsb000 c
+    where a.ygbh00 = b.ygbh00(+)
+      and b.jsid00 = c.jsid00(+)
+      and a.ygbh00 = #{ygbh00}
+  </select>
+
+  <select id="getUserList" resultType="com.ylz.yx.pay.system.user.model.Personnel"
+          parameterType="java.util.Map">
+    select a.ygbh00, a.xkh000, a.zwxm00, a.czbz00, b.jsid00, c.jsmc00, to_char(a.cjsj00, 'yyyy-MM-dd hh24:mi:ss') cjsj00
+    from bm_ygbm00 a, pt_jsygb0 b, pt_jsb000 c
+    where a.ygbh00 = b.ygbh00(+) and b.jsid00 = c.jsid00(+)
+
+    <if test="zwxm00 != null and zwxm00 !=''">
+      and instr(a.zwxm00||a.ygbh00, #{zwxm00}) > 0
+    </if>
+    <if test="czbz00 != null and czbz00 !=''">
+      and czbz00 = #{czbz00}
+    </if>
+    order by a.ygbh00
+  </select>
+
+  <select id="countUserList" resultType="java.lang.Long"
+          parameterType="java.util.Map">
+    select count(1) from bm_ygbm00 a
+
+    <where>
+      <if test="zwxm00 != null and zwxm00 !=''">
+        and instr(a.zwxm00||a.ygbh00, #{zwxm00}) > 0
+      </if>
+      <if test="czbz00 != null and czbz00 !=''">
+        and czbz00 = #{czbz00}
+      </if>
+    </where>
+  </select>
+
+  <insert id="insertBmygbm00" parameterType="com.ylz.yx.pay.system.user.model.UserParam">
+    insert into bm_ygbm00 (YGBH00, ZWXM00, XKH000, CZBZ00, YHKL00, CJSJ00)
+    values (SQ_BM_YGBM00_YGBH00.NEXTVAL, #{zwxm00,jdbcType=VARCHAR}, #{xkh000,jdbcType=VARCHAR},
+            #{czbz00,jdbcType=CHAR}, #{yhkl00}, sysdate)
+  </insert>
+
+  <update id="updateBmygbm00" parameterType="com.ylz.yx.pay.system.user.model.UserParam">
+    update bm_ygbm00
+    <set>
+      <if test="zwxm00 != null and zwxm00 != ''">
+        zwxm00 = #{zwxm00},
+      </if>
+      <if test="yhkl00 != null and yhkl00 != ''">
+        yhkl00 = #{yhkl00},
+      </if>
+      <if test="czbz00 != null and czbz00 != ''">
+        czbz00 = #{czbz00},
+      </if>
+    </set>
+    where ygbh00 = #{ygbh00}
+  </update>
+
+  <select id="getSeqNum" resultType="java.lang.Integer">
+    select SQ_BM_YGBM00_YGBH00.NEXTVAL from dual
+  </select>
+</mapper>

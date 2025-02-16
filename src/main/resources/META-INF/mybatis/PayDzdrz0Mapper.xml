@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="pay.dzdrz0">
+    <resultMap id="BaseResultMap" type="com.ylz.yx.pay.system.ftp.model.PayDzdrz0">
+        <id column="ID0000" jdbcType="VARCHAR" property="id0000"/>
+        <result column="QQDZ00" jdbcType="VARCHAR" property="qqdz00"/>
+        <result column="DZRQ00" jdbcType="VARCHAR" property="dzrq00"/>
+        <result column="WJMC00" jdbcType="VARCHAR" property="wjmc00"/>
+        <result column="SFXZ00" jdbcType="VARCHAR" property="sfxz00"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        ID0000
+        , QQDZ00, DZRQ00, WJMC00, SFXZ00
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from PAY_DZDRZ0
+        where ID0000 = #{id0000,jdbcType=VARCHAR}
+    </select>
+    <select id="selectAllList" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from PAY_DZDRZ0
+        where SFXZ00 = '0'
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+        delete
+        from PAY_DZDRZ0
+        where ID0000 = #{id0000,jdbcType=VARCHAR}
+    </delete>
+    <insert id="insert" parameterType="com.ylz.yx.pay.system.ftp.model.PayDzdrz0">
+        insert into PAY_DZDRZ0 (ID0000, QQDZ00, DZRQ00, WJMC00,
+                                SFXZ00)
+        values (#{id0000,jdbcType=VARCHAR}, #{qqdz00,jdbcType=VARCHAR}, #{dzrq00,jdbcType=VARCHAR},
+                #{wjmc00,jdbcType=VARCHAR},
+                #{sfxz00,jdbcType=VARCHAR})
+    </insert>
+    <insert id="insertSelective" parameterType="com.ylz.yx.pay.system.ftp.model.PayDzdrz0">
+        insert into PAY_DZDRZ0
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id0000 != null">
+                ID0000,
+            </if>
+            <if test="qqdz00 != null">
+                QQDZ00,
+            </if>
+            <if test="dzrq00 != null">
+                DZRQ00,
+            </if>
+            <if test="wjmc00 != null">
+                WJMC00,
+            </if>
+            <if test="sfxz00 != null">
+                SFXZ00,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id0000 != null">
+                #{id0000,jdbcType=VARCHAR},
+            </if>
+            <if test="qqdz00 != null">
+                #{qqdz00,jdbcType=VARCHAR},
+            </if>
+            <if test="dzrq00 != null">
+                #{dzrq00,jdbcType=VARCHAR},
+            </if>
+            <if test="wjmc00 != null">
+                #{wjmc00,jdbcType=VARCHAR},
+            </if>
+            <if test="sfxz00 != null">
+                #{sfxz00,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.ylz.yx.pay.system.ftp.model.PayDzdrz0">
+        update PAY_DZDRZ0
+        <set>
+            <if test="qqdz00 != null">
+                QQDZ00 = #{qqdz00,jdbcType=VARCHAR},
+            </if>
+            <if test="dzrq00 != null">
+                DZRQ00 = #{dzrq00,jdbcType=VARCHAR},
+            </if>
+            <if test="wjmc00 != null">
+                WJMC00 = #{wjmc00,jdbcType=VARCHAR},
+            </if>
+            <if test="sfxz00 != null">
+                SFXZ00 = #{sfxz00,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where ID0000 = #{id0000,jdbcType=VARCHAR}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.ylz.yx.pay.system.ftp.model.PayDzdrz0">
+        update PAY_DZDRZ0
+        set QQDZ00 = #{qqdz00,jdbcType=VARCHAR},
+            DZRQ00 = #{dzrq00,jdbcType=VARCHAR},
+            WJMC00 = #{wjmc00,jdbcType=VARCHAR},
+            SFXZ00 = #{sfxz00,jdbcType=VARCHAR}
+        where ID0000 = #{id0000,jdbcType=VARCHAR}
+    </update>
+
+    <update id="update" parameterType="com.ylz.yx.pay.system.ftp.model.PayDzdrz0">
+        update PAY_DZDRZ0
+        set SFXZ00 = '1'
+        where DZRQ00 = #{dzrq00,jdbcType=VARCHAR}
+          and WJMC00 = #{wjmc00,jdbcType=VARCHAR}
+    </update>
+</mapper>

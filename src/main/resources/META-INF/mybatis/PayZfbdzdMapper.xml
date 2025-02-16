@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="pay.zfbdzd">
+  <resultMap id="BaseResultMap" type="com.ylz.yx.pay.record.model.PayZfbdzd">
+    <result column="DZRQ00" jdbcType="VARCHAR" property="dzrq00" />
+    <result column="ZFDDH0" jdbcType="VARCHAR" property="zfddh0" />
+    <result column="XTDDH0" jdbcType="VARCHAR" property="xtddh0" />
+    <result column="YWLX00" jdbcType="VARCHAR" property="ywlx00" />
+    <result column="DDMC00" jdbcType="VARCHAR" property="ddmc00" />
+    <result column="DDCJSJ" jdbcType="VARCHAR" property="ddcjsj" />
+    <result column="DDZFSJ" jdbcType="VARCHAR" property="ddzfsj" />
+    <result column="MDBH00" jdbcType="VARCHAR" property="mdbh00" />
+    <result column="MDMC00" jdbcType="VARCHAR" property="mdmc00" />
+    <result column="CZY000" jdbcType="VARCHAR" property="czy000" />
+    <result column="ZDH000" jdbcType="VARCHAR" property="zdh000" />
+    <result column="DFZH00" jdbcType="VARCHAR" property="dfzh00" />
+    <result column="ZFJE00" jdbcType="NUMERIC" property="zfje00" />
+    <result column="SJSS00" jdbcType="NUMERIC" property="sjss00" />
+    <result column="ZFBHB0" jdbcType="NUMERIC" property="zfbhb0" />
+    <result column="JFB000" jdbcType="NUMERIC" property="jfb000" />
+    <result column="ZFBYH0" jdbcType="NUMERIC" property="zfbyh0" />
+    <result column="SJYH00" jdbcType="NUMERIC" property="sjyh00" />
+    <result column="QHXJE0" jdbcType="NUMERIC" property="qhxje0" />
+    <result column="QMC000" jdbcType="VARCHAR" property="qmc000" />
+    <result column="SJHBJE" jdbcType="NUMERIC" property="sjhbje" />
+    <result column="KXFJE0" jdbcType="NUMERIC" property="kxfje0" />
+    <result column="TKDDH0" jdbcType="VARCHAR" property="tkddh0" />
+    <result column="FWF000" jdbcType="NUMERIC" property="fwf000" />
+    <result column="FR0000" jdbcType="NUMERIC" property="fr0000" />
+    <result column="BZ0000" jdbcType="VARCHAR" property="bz0000" />
+    <result column="CJSJ00" jdbcType="TIMESTAMP" property="cjsj00" />
+  </resultMap>
+
+  <select id="selectCount" resultType="java.lang.Integer" parameterType="java.lang.String">
+    select count(*) from pay_zfbdzd where to_char(dzrq00,'yyyyMMdd') = #{billDate}
+  </select>
+
+  <insert id="insertSelective" parameterType="com.ylz.yx.pay.record.model.PayZfbdzd">
+    insert into PAY_ZFBDZD
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="dzrq00 != null">
+        DZRQ00,
+      </if>
+      <if test="zfddh0 != null">
+        ZFDDH0,
+      </if>
+      <if test="xtddh0 != null">
+        XTDDH0,
+      </if>
+      <if test="ywlx00 != null">
+        YWLX00,
+      </if>
+      <if test="ddmc00 != null">
+        DDMC00,
+      </if>
+      <if test="ddcjsj != null">
+        DDCJSJ,
+      </if>
+      <if test="ddzfsj != null">
+        DDZFSJ,
+      </if>
+      <if test="mdbh00 != null">
+        MDBH00,
+      </if>
+      <if test="mdmc00 != null">
+        MDMC00,
+      </if>
+      <if test="czy000 != null">
+        CZY000,
+      </if>
+      <if test="zdh000 != null">
+        ZDH000,
+      </if>
+      <if test="dfzh00 != null">
+        DFZH00,
+      </if>
+      <if test="zfje00 != null">
+        ZFJE00,
+      </if>
+      <if test="sjss00 != null">
+        SJSS00,
+      </if>
+      <if test="zfbhb0 != null">
+        ZFBHB0,
+      </if>
+      <if test="jfb000 != null">
+        JFB000,
+      </if>
+      <if test="zfbyh0 != null">
+        ZFBYH0,
+      </if>
+      <if test="sjyh00 != null">
+        SJYH00,
+      </if>
+      <if test="qhxje0 != null">
+        QHXJE0,
+      </if>
+      <if test="qmc000 != null">
+        QMC000,
+      </if>
+      <if test="sjhbje != null">
+        SJHBJE,
+      </if>
+      <if test="kxfje0 != null">
+        KXFJE0,
+      </if>
+      <if test="tkddh0 != null">
+        TKDDH0,
+      </if>
+      <if test="fwf000 != null">
+        FWF000,
+      </if>
+      <if test="fr0000 != null">
+        FR0000,
+      </if>
+      <if test="bz0000 != null">
+        BZ0000,
+      </if>
+      <if test="cjsj00 != null">
+        CJSJ00,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="dzrq00 != null">
+        to_date(#{dzrq00,jdbcType=VARCHAR},'yyyy-MM-dd'),
+      </if>
+      <if test="zfddh0 != null">
+        #{zfddh0,jdbcType=VARCHAR},
+      </if>
+      <if test="xtddh0 != null">
+        #{xtddh0,jdbcType=VARCHAR},
+      </if>
+      <if test="ywlx00 != null">
+        #{ywlx00,jdbcType=VARCHAR},
+      </if>
+      <if test="ddmc00 != null">
+        #{ddmc00,jdbcType=VARCHAR},
+      </if>
+      <if test="ddcjsj != null">
+        #{ddcjsj,jdbcType=VARCHAR},
+      </if>
+      <if test="ddzfsj != null">
+        #{ddzfsj,jdbcType=VARCHAR},
+      </if>
+      <if test="mdbh00 != null">
+        #{mdbh00,jdbcType=VARCHAR},
+      </if>
+      <if test="mdmc00 != null">
+        #{mdmc00,jdbcType=VARCHAR},
+      </if>
+      <if test="czy000 != null">
+        #{czy000,jdbcType=VARCHAR},
+      </if>
+      <if test="zdh000 != null">
+        #{zdh000,jdbcType=VARCHAR},
+      </if>
+      <if test="dfzh00 != null">
+        #{dfzh00,jdbcType=VARCHAR},
+      </if>
+      <if test="zfje00 != null">
+        #{zfje00,jdbcType=NUMERIC},
+      </if>
+      <if test="sjss00 != null">
+        #{sjss00,jdbcType=NUMERIC},
+      </if>
+      <if test="zfbhb0 != null">
+        #{zfbhb0,jdbcType=NUMERIC},
+      </if>
+      <if test="jfb000 != null">
+        #{jfb000,jdbcType=NUMERIC},
+      </if>
+      <if test="zfbyh0 != null">
+        #{zfbyh0,jdbcType=NUMERIC},
+      </if>
+      <if test="sjyh00 != null">
+        #{sjyh00,jdbcType=NUMERIC},
+      </if>
+      <if test="qhxje0 != null">
+        #{qhxje0,jdbcType=NUMERIC},
+      </if>
+      <if test="qmc000 != null">
+        #{qmc000,jdbcType=VARCHAR},
+      </if>
+      <if test="sjhbje != null">
+        #{sjhbje,jdbcType=NUMERIC},
+      </if>
+      <if test="kxfje0 != null">
+        #{kxfje0,jdbcType=NUMERIC},
+      </if>
+      <if test="tkddh0 != null">
+        #{tkddh0,jdbcType=VARCHAR},
+      </if>
+      <if test="fwf000 != null">
+        #{fwf000,jdbcType=NUMERIC},
+      </if>
+      <if test="fr0000 != null">
+        #{fr0000,jdbcType=NUMERIC},
+      </if>
+      <if test="bz0000 != null">
+        #{bz0000,jdbcType=VARCHAR},
+      </if>
+      <if test="cjsj00 != null">
+        #{cjsj00,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+
+  <update id="updateByDzrq00" parameterType="java.lang.String">
+    update PAY_ZFBDZD set SFYDZ0 = '0' where to_char(dzrq00,'yyyyMMdd') = #{billDate}
+  </update>
+
+  <delete id="deleteByDzrq00" parameterType="java.lang.String">
+    delete from PAY_ZFBDZD where to_char(dzrq00, 'yyyyMMdd') = #{billDate}
+  </delete>
+</mapper>

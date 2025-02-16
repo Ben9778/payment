@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="system.czrzjl">
+
+  <insert id="insertSelective" parameterType="com.ylz.yx.pay.system.log.model.XtCzrzjl">
+    insert into XT_CZRZJL
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id0000 != null">
+        ID0000,
+      </if>
+      <if test="czmk00 != null">
+        CZMK00,
+      </if>
+      <if test="ywlx00 != null">
+        YWLX00,
+      </if>
+      <if test="qqff00 != null">
+        QQFF00,
+      </if>
+      <if test="qqfs00 != null">
+        QQFS00,
+      </if>
+      <if test="ygbh00 != null">
+        YGBH00,
+      </if>
+      <if test="qqurl0 != null">
+        QQURL0,
+      </if>
+      <if test="qqcs00 != null">
+        QQCS00,
+      </if>
+      <if test="fhcs00 != null">
+        FHCS00,
+      </if>
+      <if test="cznr00 != null">
+        CZNR00,
+      </if>
+      <if test="czzt00 != null">
+        CZZT00,
+      </if>
+      <if test="cwxx00 != null">
+        CWXX00,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id0000 != null">
+        #{id0000,jdbcType=VARCHAR},
+      </if>
+      <if test="czmk00 != null">
+        #{czmk00,jdbcType=VARCHAR},
+      </if>
+      <if test="ywlx00 != null">
+        #{ywlx00,jdbcType=NUMERIC},
+      </if>
+      <if test="qqff00 != null">
+        #{qqff00,jdbcType=VARCHAR},
+      </if>
+      <if test="qqfs00 != null">
+        #{qqfs00,jdbcType=VARCHAR},
+      </if>
+      <if test="ygbh00 != null">
+        #{ygbh00,jdbcType=VARCHAR},
+      </if>
+      <if test="qqurl0 != null">
+        #{qqurl0,jdbcType=VARCHAR},
+      </if>
+      <if test="qqcs00 != null">
+        #{qqcs00,jdbcType=VARCHAR},
+      </if>
+      <if test="fhcs00 != null">
+        #{fhcs00,jdbcType=VARCHAR},
+      </if>
+      <if test="cznr00 != null">
+        #{cznr00,jdbcType=VARCHAR},
+      </if>
+      <if test="czzt00 != null">
+        #{czzt00,jdbcType=NUMERIC},
+      </if>
+      <if test="cwxx00 != null">
+        #{cwxx00,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+
+  <select id="getRzjlList" resultType="com.ylz.yx.pay.system.log.dto.GetOperLogOutput" parameterType="java.util.Map" >
+    select ID0000,CZMK00,YWLX00,(select ygbh00 from  BM_YGBM00 a where a.xkh000=t.ygbh00 )as ygbh00, (select zwxm00 from  BM_YGBM00 a where a.xkh000=t.ygbh00 )as zwxm00 ,
+    (select a.jsmc00 from pt_jsb000 a,pt_jsygb0 b,bm_ygbm00 c where a.jsid00 = b.jsid00 and b.ygbh00 = c.ygbh00 and c.xkh000 = t.ygbh00) jsmc00,
+    CZZT00,   to_char(CZSJ00,'yyyy-mm-dd hh24:mi:ss') as CZSJ00
+    from XT_CZRZJL t
+    <where>
+      <if test="czmk00 != null and czmk00 != ''">
+       and instr(t.czmk00,#{czmk00}) > 0
+      </if>
+      <if test="ywlx00 != null and ywlx00 != ''">
+        and t.YWLX00 = #{ywlx00}
+      </if>
+      <if test="startTime != null and startTime != ''">
+        <![CDATA[
+              and t.czsj00 >= to_date(#{startTime},'yyyy-MM-dd')
+        ]]>
+      </if>
+      <if test="endTime != null and endTime != ''">
+        <![CDATA[
+              and t.czsj00 < to_date(#{endTime},'yyyy-MM-dd')+1
+        ]]>
+      </if>
+      <if test="ygbh00 != null and ygbh00 != ''">
+        and t.YGBH00 in  (select xkh000 from  BM_YGBM00  where instr(zwxm00,#{ygbh00}) > 0)
+      </if>
+      <if test="czzt00 != null and czzt00 != ''">
+        and t.CZZT00 = #{czzt00}
+      </if>
+    </where>
+      order by czsj00 desc 
+  </select>
+
+  <select id="getCountRzjlList" resultType="java.lang.Long"  parameterType="java.util.Map" >
+    select count(1) from XT_CZRZJL t
+    <where>
+      <if test="czmk00 != null and czmk00 != ''">
+        and instr(t.czmk00,#{czmk00}) > 0
+      </if>
+      <if test="ywlx00 != null and ywlx00 != ''">
+        and t.YWLX00 = #{ywlx00}
+      </if>
+      <if test="startTime != null and startTime != ''">
+        <![CDATA[
+              and t.czsj00 >= to_date(#{startTime},'yyyy-MM-dd')
+        ]]>
+      </if>
+      <if test="endTime != null and endTime != ''">
+        <![CDATA[
+              and t.czsj00 < to_date(#{endTime},'yyyy-MM-dd')+1
+        ]]>
+      </if>
+      <if test="ygbh00 != null and ygbh00 != ''">
+        and t.YGBH00 in  (select xkh000 from  BM_YGBM00  where instr(zwxm00,#{ygbh00}) > 0)
+      </if>
+      <if test="czzt00 != null and czzt00 != ''">
+        and t.CZZT00 = #{czzt00}
+      </if>
+    </where>
+  </select>
+
+  <select id="getRzjlbw" resultType="java.util.Map"  parameterType="java.lang.String">
+        select QQCS00 as "qqcs00",FHCS00 as "fhcs00", CZNR00 as "cznr00" from XT_CZRZJL t
+        where t.ID0000 = #{id0000}
+  </select>
+
+</mapper>

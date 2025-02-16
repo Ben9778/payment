@@ -1,0 +1,499 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="pay.dzmxb0">
+    <resultMap id="BaseResultMap" type="com.ylz.yx.pay.record.model.PayDzmxb0">
+        <result column="ID0000" jdbcType="VARCHAR" property="id0000"/>
+        <result column="XTDZSJ" jdbcType="TIMESTAMP" property="xtdzsj"/>
+        <result column="DDCJSJ" jdbcType="TIMESTAMP" property="ddcjsj"/>
+        <result column="XTDDH0" jdbcType="VARCHAR" property="xtddh0"/>
+        <result column="FWDDH0" jdbcType="VARCHAR" property="fwddh0"/>
+        <result column="ZFDDH0" jdbcType="VARCHAR" property="zfddh0"/>
+        <result column="DDLX00" jdbcType="VARCHAR" property="ddlx00"/>
+        <result column="YWLX00" jdbcType="VARCHAR" property="ywlx00"/>
+        <result column="HZXM00" jdbcType="VARCHAR" property="hzxm00"/>
+        <result column="KHZYH0" jdbcType="VARCHAR" property="khzyh0"/>
+        <result column="FWQDID" jdbcType="VARCHAR" property="fwqdid"/>
+        <result column="ZFQD00" jdbcType="VARCHAR" property="zfqd00"/>
+        <result column="PTJE00" jdbcType="NUMERIC" property="ptje00"/>
+        <result column="FWQDJE" jdbcType="NUMERIC" property="fwqdje"/>
+        <result column="ZFPTJE" jdbcType="NUMERIC" property="zfptje"/>
+        <result column="DZJG00" jdbcType="VARCHAR" property="dzjg00"/>
+        <result column="CYJE00" jdbcType="NUMERIC" property="cyje00"/>
+        <result column="YCZT00" jdbcType="VARCHAR" property="yczt00"/>
+        <result column="CLZT00" jdbcType="VARCHAR" property="clzt00"/>
+        <result column="CLFS00" jdbcType="VARCHAR" property="clfs00"/>
+        <result column="CLSJ00" jdbcType="TIMESTAMP" property="clsj00"/>
+        <result column="CLR000" jdbcType="VARCHAR" property="clr000"/>
+        <result column="BZ0000" jdbcType="VARCHAR" property="bz0000"/>
+        <result column="DDZT00" jdbcType="VARCHAR" property="ddzt00"/>
+        <result column="CJSJ00" jdbcType="TIMESTAMP" property="cjsj00"/>
+    </resultMap>
+
+    <select id="selectAllList" parameterType="com.ylz.yx.pay.record.model.QueryParam" resultMap="BaseResultMap">
+        select * from (select A.ID0000, A.XTDZSJ, A.DDCJSJ, A.XTDDH0, A.FWDDH0, A.ZFDDH0, A.DDLX00, A.YWLX00, A.HZXM00,
+        A.KHZYH0, F.QDMC00 FWQDID, F.ZFQDMC ZFQD00, A.PTJE00, A.FWQDJE, A.ZFPTJE, A.FWDZJG, A.ZFDZJG,
+        A.FWCYJE, ABS(A.ZFCYJE) ZFCYJE, A.YCZT00, A.CLZT00, A.CLFS00, A.CLSJ00, D.ZWXM00 CLR000, A.BZ0000,
+        A.DDZT00, A.CJSJ00, CASE WHEN A.FWDZJG = '1' AND A.ZFDZJG = '1' THEN '1' WHEN A.FWDZJG = '1' AND A.ZFDZJG != '1'
+        THEN A.ZFDZJG
+        WHEN A.FWDZJG != '1' AND A.ZFDZJG = '1' THEN A.FWDZJG ELSE A.FWDZJG END DZJG00
+        from PAY_DZMXB0 A, BM_YGBM00 D, (SELECT C.ID0000, C.QDMC00, B.ID0000 ZFQDID, B.QDBM00, B.ZFQDMC
+        FROM PAY_ZFQD00 B, PAY_FWQD00 C, PAY_FWZFGX E
+        WHERE E.FWQDID = C.ID0000
+        AND E.ZFQDID = B.ID0000) F
+        where A.CLR000 = D.YGBH00(+)
+        and A.FWQDID = F.ID0000(+)
+        and A.ZFQD00 = F.QDBM00(+)
+        and TO_CHAR(A.XTDZSJ, 'YYYY-MM-DD') between #{ksrq00} and #{jsrq00}
+        <if test="jylx00 != null and jylx00 != ''">
+            and A.YWLX00 = #{jylx00}
+        </if>
+        <if test="ywlx00 != null and ywlx00 != ''">
+            and A.DDLX00 = #{ywlx00}
+        </if>
+        <if test="fwqd00 != null and fwqd00 != ''">
+            and A.FWQDID = #{fwqd00}
+        </if>
+        <if test="zfqd00 != null and zfqd00 != ''">
+            and F.ZFQDID = #{zfqd00}
+        </if>
+        <if test="clzt00 != null and clzt00 != ''">
+            and A.CLZT00 = #{clzt00}
+        </if>
+        <if test="yczt00 != null and yczt00 != ''">
+            and A.YCZT00 = #{yczt00}
+        </if>
+        <if test="clfs00 != null and clfs00 != ''">
+            and A.CLFS00 = #{clfs00}
+        </if>
+        <if test="content != null and content != ''">
+            and instr(A.XTDDH0||A.HZXM00||A.KHZYH0, #{content}) > 0
+        </if>
+        )
+        <where>
+            <if test="dzjg00 != null and dzjg00 != ''">
+                and DZJG00 = #{dzjg00}
+            </if>
+        </where>
+        order by DDCJSJ desc
+    </select>
+
+    <select id="selectCountAllList" parameterType="com.ylz.yx.pay.record.model.QueryParam"
+            resultType="java.lang.Integer">
+        select
+        count(*)
+        from (select A.ID0000, A.XTDZSJ, A.DDCJSJ, A.XTDDH0, A.FWDDH0, A.ZFDDH0, A.DDLX00, A.YWLX00, A.HZXM00,
+        A.KHZYH0, F.QDMC00 FWQDID, F.ZFQDMC ZFQD00, A.PTJE00, A.FWQDJE, A.ZFPTJE, A.FWDZJG, A.ZFDZJG,
+        A.FWCYJE, ABS(A.ZFCYJE) ZFCYJE, A.YCZT00, A.CLZT00, A.CLFS00, A.CLSJ00, D.ZWXM00 CLR000, A.BZ0000,
+        A.DDZT00, A.CJSJ00, CASE WHEN A.FWDZJG = '1' AND A.ZFDZJG = '1' THEN '1' WHEN A.FWDZJG = '1' AND A.ZFDZJG != '1'
+        THEN A.ZFDZJG
+        WHEN A.FWDZJG != '1' AND A.ZFDZJG = '1' THEN A.FWDZJG ELSE A.FWDZJG END DZJG00
+        from PAY_DZMXB0 A, BM_YGBM00 D, (SELECT C.ID0000, C.QDMC00, B.ID0000 ZFQDID, B.QDBM00, B.ZFQDMC
+        FROM PAY_ZFQD00 B, PAY_FWQD00 C, PAY_FWZFGX E
+        WHERE E.FWQDID = C.ID0000
+        AND E.ZFQDID = B.ID0000) F
+        where A.CLR000 = D.YGBH00(+)
+        and A.FWQDID = F.ID0000(+)
+        and A.ZFQD00 = F.QDBM00(+)
+        and TO_CHAR(A.XTDZSJ, 'YYYY-MM-DD') between #{ksrq00} and #{jsrq00}
+        <if test="jylx00 != null and jylx00 != ''">
+            and A.YWLX00 = #{jylx00}
+        </if>
+        <if test="ywlx00 != null and ywlx00 != ''">
+            and A.DDLX00 = #{ywlx00}
+        </if>
+        <if test="fwqd00 != null and fwqd00 != ''">
+            and A.FWQDID = #{fwqd00}
+        </if>
+        <if test="zfqd00 != null and zfqd00 != ''">
+            and F.ZFQDID = #{zfqd00}
+        </if>
+        <if test="clzt00 != null and clzt00 != ''">
+            and A.CLZT00 = #{clzt00}
+        </if>
+        <if test="yczt00 != null and yczt00 != ''">
+            and A.YCZT00 = #{yczt00}
+        </if>
+        <if test="clfs00 != null and clfs00 != ''">
+            and A.CLFS00 = #{clfs00}
+        </if>
+        <if test="content != null and content != ''">
+            and instr(A.XTDDH0||A.HZXM00||A.KHZYH0, #{content}) > 0
+        </if>
+        )
+        <where>
+            <if test="dzjg00 != null and dzjg00 != ''">
+                and DZJG00 = #{dzjg00}
+            </if>
+        </where>
+    </select>
+
+    <select id="selectByPrimaryKey" parameterType="com.ylz.yx.pay.record.model.QueryParam" resultMap="BaseResultMap">
+        select A.ID0000,
+               A.XTDZSJ,
+               A.DDCJSJ,
+               A.XTDDH0,
+               A.FWDDH0,
+               A.ZFDDH0,
+               A.DDLX00,
+               A.YWLX00,
+               A.HZXM00,
+               A.KHZYH0,
+               F.QDMC00      FWQDID,
+               F.ZFQDMC      ZFQD00,
+               A.PTJE00,
+               A.FWQDJE,
+               A.ZFPTJE,
+               A.FWDZJG,
+               A.ZFDZJG,
+               A.FWCYJE,
+               ABS(A.ZFCYJE) ZFCYJE,
+               A.YCZT00,
+               A.CLZT00,
+               A.CLFS00,
+               A.CLSJ00,
+               D.ZWXM00      CLR000,
+               A.BZ0000,
+               A.DDZT00
+        from PAY_DZMXB0 A,
+             BM_YGBM00 D,
+             (SELECT C.ID0000, C.QDMC00, B.ID0000 ZFQDID, B.QDBM00, B.ZFQDMC
+              FROM PAY_ZFQD00 B,
+                   PAY_FWQD00 C,
+                   PAY_FWZFGX E
+              WHERE E.FWQDID = C.ID0000
+                AND E.ZFQDID = B.ID0000) F
+        where A.CLR000 = D.YGBH00(+)
+          and A.FWQDID = F.ID0000(+)
+          and A.ZFQD00 = F.QDBM00(+)
+          and A.ID0000 = #{id0000,jdbcType=VARCHAR}
+    </select>
+
+    <update id="updateByPrimaryKey" parameterType="com.ylz.yx.pay.record.model.PayDzmxb0">
+        update PAY_DZMXB0
+        set CLZT00 = #{clzt00,jdbcType=VARCHAR},
+            CLFS00 = #{clfs00,jdbcType=VARCHAR},
+            BZ0000 = #{bz0000,jdbcType=VARCHAR},
+            CLSJ00 = #{clsj00,jdbcType=TIMESTAMP},
+            CLR000 = #{clr000,jdbcType=VARCHAR}
+        where ID0000 = #{id0000,jdbcType=VARCHAR}
+    </update>
+
+    <insert id="insert" parameterType="com.ylz.yx.pay.record.model.PayDzmxb0">
+        insert into PAY_DZMXB0 (ID0000, XTDZSJ, DDCJSJ,
+                                XTDDH0, FWDDH0, ZFDDH0,
+                                DDLX00, YWLX00, HZXM00,
+                                KHZYH0, FWQDID, ZFQD00,
+                                PTJE00, FWQDJE, ZFPTJE,
+                                DZJG00, CYJE00, YCZT00,
+                                CLZT00, CLFS00, CLSJ00,
+                                CLR000, BZ0000)
+        values (#{id0000,jdbcType=VARCHAR}, #{xtdzsj,jdbcType=TIMESTAMP}, #{ddcjsj,jdbcType=TIMESTAMP},
+                #{xtddh0,jdbcType=VARCHAR}, #{fwddh0,jdbcType=VARCHAR}, #{zfddh0,jdbcType=VARCHAR},
+                #{ddlx00,jdbcType=VARCHAR}, #{ywlx00,jdbcType=VARCHAR}, #{hzxm00,jdbcType=VARCHAR},
+                #{khzyh0,jdbcType=VARCHAR}, #{fwqdid,jdbcType=VARCHAR}, #{zfqd00,jdbcType=VARCHAR},
+                #{ptje00,jdbcType=NUMERIC}, #{fwqdje,jdbcType=NUMERIC}, #{zfptje,jdbcType=NUMERIC},
+                #{dzjg00,jdbcType=VARCHAR}, #{cyje00,jdbcType=NUMERIC}, #{yczt00,jdbcType=VARCHAR},
+                #{clzt00,jdbcType=VARCHAR}, #{clfs00,jdbcType=VARCHAR}, #{clsj00,jdbcType=TIMESTAMP},
+                #{clr000,jdbcType=VARCHAR}, #{bz0000,jdbcType=VARCHAR})
+    </insert>
+    <insert id="insertSelective" parameterType="com.ylz.yx.pay.record.model.PayDzmxb0">
+        insert into PAY_DZMXB0
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id0000 != null">
+                ID0000,
+            </if>
+            <if test="xtdzsj != null">
+                XTDZSJ,
+            </if>
+            <if test="ddcjsj != null">
+                DDCJSJ,
+            </if>
+            <if test="xtddh0 != null">
+                XTDDH0,
+            </if>
+            <if test="fwddh0 != null">
+                FWDDH0,
+            </if>
+            <if test="zfddh0 != null">
+                ZFDDH0,
+            </if>
+            <if test="ddlx00 != null">
+                DDLX00,
+            </if>
+            <if test="ywlx00 != null">
+                YWLX00,
+            </if>
+            <if test="hzxm00 != null">
+                HZXM00,
+            </if>
+            <if test="khzyh0 != null">
+                KHZYH0,
+            </if>
+            <if test="fwqdid != null">
+                FWQDID,
+            </if>
+            <if test="zfqd00 != null">
+                ZFQD00,
+            </if>
+            <if test="ptje00 != null">
+                PTJE00,
+            </if>
+            <if test="fwqdje != null">
+                FWQDJE,
+            </if>
+            <if test="zfptje != null">
+                ZFPTJE,
+            </if>
+            <if test="dzjg00 != null">
+                DZJG00,
+            </if>
+            <if test="cyje00 != null">
+                CYJE00,
+            </if>
+            <if test="yczt00 != null">
+                YCZT00,
+            </if>
+            <if test="clzt00 != null">
+                CLZT00,
+            </if>
+            <if test="clfs00 != null">
+                CLFS00,
+            </if>
+            <if test="clsj00 != null">
+                CLSJ00,
+            </if>
+            <if test="clr000 != null">
+                CLR000,
+            </if>
+            <if test="bz0000 != null">
+                BZ0000,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id0000 != null">
+                #{id0000,jdbcType=VARCHAR},
+            </if>
+            <if test="xtdzsj != null">
+                #{xtdzsj,jdbcType=TIMESTAMP},
+            </if>
+            <if test="ddcjsj != null">
+                #{ddcjsj,jdbcType=TIMESTAMP},
+            </if>
+            <if test="xtddh0 != null">
+                #{xtddh0,jdbcType=VARCHAR},
+            </if>
+            <if test="fwddh0 != null">
+                #{fwddh0,jdbcType=VARCHAR},
+            </if>
+            <if test="zfddh0 != null">
+                #{zfddh0,jdbcType=VARCHAR},
+            </if>
+            <if test="ddlx00 != null">
+                #{ddlx00,jdbcType=VARCHAR},
+            </if>
+            <if test="ywlx00 != null">
+                #{ywlx00,jdbcType=VARCHAR},
+            </if>
+            <if test="hzxm00 != null">
+                #{hzxm00,jdbcType=VARCHAR},
+            </if>
+            <if test="khzyh0 != null">
+                #{khzyh0,jdbcType=VARCHAR},
+            </if>
+            <if test="fwqdid != null">
+                #{fwqdid,jdbcType=VARCHAR},
+            </if>
+            <if test="zfqd00 != null">
+                #{zfqd00,jdbcType=VARCHAR},
+            </if>
+            <if test="ptje00 != null">
+                #{ptje00,jdbcType=NUMERIC},
+            </if>
+            <if test="fwqdje != null">
+                #{fwqdje,jdbcType=NUMERIC},
+            </if>
+            <if test="zfptje != null">
+                #{zfptje,jdbcType=NUMERIC},
+            </if>
+            <if test="dzjg00 != null">
+                #{dzjg00,jdbcType=VARCHAR},
+            </if>
+            <if test="cyje00 != null">
+                #{cyje00,jdbcType=NUMERIC},
+            </if>
+            <if test="yczt00 != null">
+                #{yczt00,jdbcType=VARCHAR},
+            </if>
+            <if test="clzt00 != null">
+                #{clzt00,jdbcType=VARCHAR},
+            </if>
+            <if test="clfs00 != null">
+                #{clfs00,jdbcType=VARCHAR},
+            </if>
+            <if test="clsj00 != null">
+                #{clsj00,jdbcType=TIMESTAMP},
+            </if>
+            <if test="clr000 != null">
+                #{clr000,jdbcType=VARCHAR},
+            </if>
+            <if test="bz0000 != null">
+                #{bz0000,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="callSP_PAY_BILL" statementType="CALLABLE"
+            parameterType="java.lang.String">
+        call SP_PAY_BILL(#{billDate,mode=IN})
+    </update>
+
+    <select id="mrdzhz" parameterType="com.ylz.yx.pay.record.model.QueryParam" resultType="com.ylz.yx.pay.record.model.PayMrdzhz">
+        select dzrq00,
+               zfqdid,
+               zfqdmc,
+               fwqdid,
+               fwqdmc,
+               ptczje - pttkje as ptje00,
+               ptbs00,
+               fwczje - fwtkje as fwqdje,
+               fwqdbs,
+               zfczje - zftkje as zfptje,
+               zfptbs,
+               replace(replace(replace(fwdzjg, 'nual;', ''), ';', chr(10)), 'nual', '对账一致') fwdzjg,
+               replace(replace(replace(zfdzjg, 'nual;', ''), ';', chr(10)), 'nual', '对账一致') zfdzjg,
+               fwcyje,
+               zfcyje,
+               case when cljd00 = '0' and clzt00 = '0' then '无需处理' when cljd00 = '0' and clzt00 > cljd00 then '已处理' else cljd00 || '笔待处理' end cljd00,
+               ptczje,
+               pttkje,
+               fwczje,
+               fwtkje,
+               zfczje,
+               zftkje
+        from (select dzrq00,
+                     max(zfqdid) zfqdid,
+                     max(zfqdmc) zfqdmc,
+                     max(fwqdid) fwqdid,
+                     max(fwqdmc) fwqdmc,
+                     sum(ptje00) ptje00,
+                     sum(ptbs00) ptbs00,
+                     sum(fwqdje) fwqdje,
+                     sum(fwqdbs) fwqdbs,
+                     sum(zfptje) zfptje,
+                     sum(zfptbs) zfptbs,
+                     LISTAGG(case when fwcyje = 0 then 'nual' else decode(fwdzjg, '1', '对账一致', '2', '长款', '3', '短款', '4', '金额不一致', '5', '特殊异常账') || '￥' ||
+                                                                   to_char(fwcyje, 'fm9999999990.00') || '元/' || ycbs00 || '笔' end, ';') within group(order by fwdzjg) as fwdzjg,
+                     LISTAGG(case when zfcyje = 0 then 'nual' else decode(zfdzjg, '1', '对账一致', '2', '长款', '3', '短款', '4', '金额不一致', '5', '特殊异常账') || '￥' ||
+                     to_char(abs(zfcyje), 'fm9999999990.00') || '元/' || ycbs00 || '笔' end, ';') within group (order by zfdzjg) as zfdzjg,
+                     sum (fwcyje) fwcyje,
+                     sum (abs(zfcyje)) zfcyje,
+                     sum (cljd00) cljd00,
+                     sum (clzt00) clzt00,
+                     sum (ptczje) ptczje,
+                     sum (pttkje) pttkje,
+                     sum (fwczje) fwczje,
+                     sum (fwtkje) fwtkje,
+                     sum (zfczje) zfczje,
+                     sum (zftkje) zftkje
+              from (select to_char(XTDZSJ, 'yyyy-MM-dd') dzrq00,
+                  max (f.zfqdid) zfqdid,
+                  max (f.zfqdmc) zfqdmc,
+                  max (a.fwqdid) fwqdid,
+                  max (f.qdmc00) fwqdmc,
+                  sum (ptje00) ptje00,
+                  sum (case when ptje00 > 0 then 1 else 0 end) ptbs00,
+                  sum (fwqdje) fwqdje,
+                  sum (case when fwqdje > 0 then 1 else 0 end) fwqdbs,
+                  sum (zfptje) zfptje,
+                  sum (case when zfptje > 0 then 1 else 0 end) zfptbs,
+                  fwdzjg,
+                  zfdzjg,
+                  sum (fwcyje) fwcyje,
+                  sum (zfcyje) zfcyje,
+                  sum (case when yczt00 = '1' then 1 else 0 end) ycbs00,
+                  sum (case when clzt00 = '0' then 1 else 0 end) cljd00,
+                  sum (case when clzt00 = '1' then 1 else 0 end) clzt00,
+                  sum (case when ywlx00 = '充值' then ptje00 else 0 end) ptczje,
+                  sum (case when ywlx00 = '退款' then ptje00 else 0 end) pttkje,
+                  sum (case when ywlx00 = '充值' then fwqdje else 0 end) fwczje,
+                  sum (case when ywlx00 = '退款' then fwqdje else 0 end) fwtkje,
+                  sum (case when ywlx00 = '充值' then zfptje else 0 end) zfczje,
+                  sum (case when ywlx00 = '退款' then zfptje else 0 end) zftkje
+                  from pay_dzmxb0 a, (select c.id0000, c.qdmc00, b.id0000 zfqdid, b.qdbm00, b.zfqdmc
+                    from pay_zfqd00 b, pay_fwqd00 c, pay_fwzfgx e
+                    where e.fwqdid = c.id0000
+                    and e.zfqdid = b.id0000) f
+                  where to_char(a.xtdzsj, 'yyyy-MM-dd') between #{ksrq00} and #{jsrq00}
+                    and a.fwqdid = f.id0000(+)
+                    and a.zfqd00 = f.qdbm00(+)
+                    <if test="fwqd00 != null and fwqd00 != ''">
+                        and a.fwqdid = #{fwqd00}
+                    </if>
+                    <if test="zfqd00 != null and zfqd00 != ''">
+                        and f.zfqdid = #{zfqd00}
+                    </if>
+                    <if test="ywlx00 != null and ywlx00 != ''">
+                        and a.ddlx00 = #{ywlx00}
+                    </if>
+                  group by to_char(xtdzsj, 'yyyy-MM-dd'), fwdzjg, zfdzjg
+                  )
+              group by dzrq00)
+        order by dzrq00 desc
+    </select>
+
+    <select id="mrdzhzCount" parameterType="com.ylz.yx.pay.record.model.QueryParam" resultType="java.lang.Integer">
+        select count(*)
+        from (select dzrq00,
+                     max(zfqdmc) zfqdmc,
+                     max(fwqdmc) fwqdmc,
+                     sum(ptje00) ptje00,
+                     sum(ptbs00) ptbs00,
+                     sum(fwqdje) fwqdje,
+                     sum(fwqdbs) fwqdbs,
+                     sum(zfptje) zfptje,
+                     sum(zfptbs) zfptbs,
+                     LISTAGG(case when fwcyje = 0 then 'nual' else decode(fwdzjg, '1', '对账一致', '2', '长款', '3', '短款', '4', '金额不一致', '5', '特殊异常账') || '￥' ||
+                                                                   to_char(fwcyje, 'fm9999999990.00') || '元/' || ycbs00 || '笔' end, ';') within group(order by fwdzjg) as fwdzjg,
+                     LISTAGG(case when zfcyje = 0 then 'nual' else decode(zfdzjg, '1', '对账一致', '2', '长款', '3', '短款', '4', '金额不一致', '5', '特殊异常账') || '￥' ||
+                     to_char(abs(zfcyje), 'fm9999999990.00') || '元/' || ycbs00 || '笔' end, ';') within group (order by zfdzjg) as zfdzjg,
+                  sum (fwcyje) fwcyje,
+                  sum (abs(zfcyje)) zfcyje,
+                  sum (cljd00) cljd00,
+                  sum (clzt00) clzt00
+              from (select to_char(XTDZSJ, 'yyyy-MM-dd') dzrq00,
+                  max (f.zfqdmc) zfqdmc,
+                  max (f.qdmc00) fwqdmc,
+                  sum (ptje00) ptje00,
+                  sum (case when ptje00 > 0 then 1 else 0 end) ptbs00,
+                  sum (fwqdje) fwqdje,
+                  sum (case when fwqdje > 0 then 1 else 0 end) fwqdbs,
+                  sum (zfptje) zfptje,
+                  sum (case when zfptje > 0 then 1 else 0 end) zfptbs,
+                  fwdzjg,
+                  zfdzjg,
+                  sum (fwcyje) fwcyje,
+                  sum (zfcyje) zfcyje,
+                  sum (case when yczt00 = '1' then 1 else 0 end) ycbs00,
+                  sum (case when clzt00 = '0' then 1 else 0 end) cljd00,
+                  sum (case when clzt00 = '1' then 1 else 0 end) clzt00
+                  from pay_dzmxb0 a, (select c.id0000, c.qdmc00, b.id0000 zfqdid, b.qdbm00, b.zfqdmc
+                    from pay_zfqd00 b, pay_fwqd00 c, pay_fwzfgx e
+                    where e.fwqdid = c.id0000
+                    and e.zfqdid = b.id0000) f
+                  where to_char(a.xtdzsj, 'yyyy-MM-dd') between #{ksrq00} and #{jsrq00}
+                    and a.fwqdid = f.id0000(+)
+                    and a.zfqd00 = f.qdbm00(+)
+                    <if test="fwqd00 != null and fwqd00 != ''">
+                        and a.fwqdid = #{fwqd00}
+                    </if>
+                    <if test="zfqd00 != null and zfqd00 != ''">
+                        and f.zfqdid = #{zfqd00}
+                    </if>
+                    <if test="ywlx00 != null and ywlx00 != ''">
+                        and a.ddlx00 = #{ywlx00}
+                    </if>
+                  group by to_char(xtdzsj, 'yyyy-MM-dd'), fwdzjg, zfdzjg
+                  )
+              group by dzrq00)
+    </select>
+</mapper>

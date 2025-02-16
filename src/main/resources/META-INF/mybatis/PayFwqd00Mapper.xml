@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="pay.fwqd00">
+  <resultMap id="BaseResultMap" type="com.ylz.yx.pay.core.entity.PayFwqd00">
+    <id column="ID0000" jdbcType="VARCHAR" property="id0000" />
+    <result column="QDMC00" jdbcType="VARCHAR" property="qdmc00" />
+    <result column="QDMY00" jdbcType="VARCHAR" property="qdmy00" />
+    <result column="QDYXQ0" jdbcType="TIMESTAMP" property="qdyxq0" />
+    <result column="CJSJ00" jdbcType="TIMESTAMP" property="cjsj00" />
+    <result column="SFQY00" jdbcType="CHAR" property="sfqy00" />
+    <result column="SFSC00" jdbcType="CHAR" property="sfsc00" />
+    <result column="SFZDCZ" jdbcType="CHAR" property="sfzdcz" />
+    <result column="YYLX00" jdbcType="CHAR" property="yylx00" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ID0000, QDMC00, QDMY00, QDYXQ0, CJSJ00, SFQY00, SFSC00, SFZDCZ, YYLX00
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from PAY_FWQD00
+    where ID0000 = #{id0000,jdbcType=VARCHAR}
+  </select>
+  <select id="selectByQdmc00" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from PAY_FWQD00
+    where QDMC00 = #{qdmc00,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from PAY_FWQD00
+    where ID0000 = #{id0000,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.ylz.yx.pay.core.entity.PayFwqd00">
+    insert into PAY_FWQD00 (ID0000, QDMC00, QDMY00, 
+      QDYXQ0, CJSJ00, SFQY00, 
+      SFSC00, SFZDCZ, YYLX00)
+    values (#{id0000,jdbcType=VARCHAR}, #{qdmc00,jdbcType=VARCHAR}, #{qdmy00,jdbcType=VARCHAR}, 
+      #{qdyxq0,jdbcType=TIMESTAMP}, #{cjsj00,jdbcType=TIMESTAMP}, #{sfqy00,jdbcType=CHAR}, 
+      #{sfsc00,jdbcType=CHAR}, #{sfzdcz,jdbcType=CHAR}, #{yylx00,jdbcType=CHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ylz.yx.pay.core.entity.PayFwqd00">
+    insert into PAY_FWQD00
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id0000 != null">
+        ID0000,
+      </if>
+      <if test="qdmc00 != null">
+        QDMC00,
+      </if>
+      <if test="qdmy00 != null">
+        QDMY00,
+      </if>
+      <if test="qdyxq0 != null">
+        QDYXQ0,
+      </if>
+      <if test="cjsj00 != null">
+        CJSJ00,
+      </if>
+      <if test="sfqy00 != null">
+        SFQY00,
+      </if>
+      <if test="sfsc00 != null">
+        SFSC00,
+      </if>
+      <if test="sfzdcz != null">
+        SFZDCZ,
+      </if>
+      <if test="yylx00 != null">
+        YYLX00,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id0000 != null">
+        #{id0000,jdbcType=VARCHAR},
+      </if>
+      <if test="qdmc00 != null">
+        #{qdmc00,jdbcType=VARCHAR},
+      </if>
+      <if test="qdmy00 != null">
+        #{qdmy00,jdbcType=VARCHAR},
+      </if>
+      <if test="qdyxq0 != null">
+        #{qdyxq0,jdbcType=TIMESTAMP},
+      </if>
+      <if test="cjsj00 != null">
+        #{cjsj00,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sfqy00 != null">
+        #{sfqy00,jdbcType=CHAR},
+      </if>
+      <if test="sfsc00 != null">
+        #{sfsc00,jdbcType=CHAR},
+      </if>
+      <if test="sfzdcz != null">
+        #{sfzdcz,jdbcType=CHAR},
+      </if>
+      <if test="yylx00 != null">
+        #{yylx00,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ylz.yx.pay.core.entity.PayFwqd00">
+    update PAY_FWQD00
+    <set>
+      <if test="qdmc00 != null">
+        QDMC00 = #{qdmc00,jdbcType=VARCHAR},
+      </if>
+      <if test="qdmy00 != null">
+        QDMY00 = #{qdmy00,jdbcType=VARCHAR},
+      </if>
+      <if test="qdyxq0 != null">
+        QDYXQ0 = #{qdyxq0,jdbcType=TIMESTAMP},
+      </if>
+      <if test="cjsj00 != null">
+        CJSJ00 = #{cjsj00,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sfqy00 != null">
+        SFQY00 = #{sfqy00,jdbcType=CHAR},
+      </if>
+      <if test="sfsc00 != null">
+        SFSC00 = #{sfsc00,jdbcType=CHAR},
+      </if>
+      <if test="sfzdcz != null">
+        SFZDCZ = #{sfzdcz,jdbcType=CHAR},
+      </if>
+      <if test="yylx00 != null">
+        YYLX00 = #{yylx00,jdbcType=CHAR},
+      </if>
+    </set>
+    where ID0000 = #{id0000,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ylz.yx.pay.core.entity.PayFwqd00">
+    update PAY_FWQD00
+    set QDMC00 = #{qdmc00,jdbcType=VARCHAR},
+      QDMY00 = #{qdmy00,jdbcType=VARCHAR},
+      QDYXQ0 = #{qdyxq0,jdbcType=TIMESTAMP},
+      CJSJ00 = #{cjsj00,jdbcType=TIMESTAMP},
+      SFQY00 = #{sfqy00,jdbcType=CHAR},
+      SFSC00 = #{sfsc00,jdbcType=CHAR},
+      SFZDCZ = #{sfzdcz,jdbcType=CHAR},
+      YYLX00 = #{yylx00,jdbcType=CHAR}
+    where ID0000 = #{id0000,jdbcType=VARCHAR}
+  </update>
+
+  <select id="selectAllList" parameterType="com.ylz.yx.pay.system.channel.model.QueryParam" resultType="com.ylz.yx.pay.system.channel.model.PayFwqd00RS">
+    select * from (
+    select A.ID0000, MAX(A.QDMC00) QDMC00,
+    RTRIM(XMLAGG(XMLPARSE(CONTENT D.qdmc00 || '、' WELLFORMED)).GETCLOBVAL(), '、') ZFQDMC,
+    RTRIM(XMLAGG(XMLPARSE(CONTENT D.qdbm00 || '、' WELLFORMED)).GETCLOBVAL(), '、') ZFQDBM,
+    MAX(A.SFQY00) SFQY00, MAX(TO_CHAR(A.CJSJ00, 'yyyy-MM-dd hh24:mi:ss')) CJSJ00, MAX(A.YYLX00) YYLX00
+    from PAY_FWQD00 A, PAY_FWZFGX B, PAY_ZFQD00 D
+    where A.ID0000 = B.FWQDID
+    and B.ZFQDID = D.ID0000
+    and A.SFSC00 = '0'
+    <if test="qdmc00 != null and qdmc00 != ''">and instr(A.QDMC00 || A.ID0000, #{qdmc00,jdbcType=VARCHAR}) > 0
+    </if>
+    <if test="sfqy00 != null and sfqy00 != ''">
+      and A.SFQY00 = #{sfqy00,jdbcType=CHAR}
+    </if>
+    GROUP BY A.ID0000
+    )
+    <where>
+      <if test="zffs00 != null and zffs00 != ''">
+        and instr(ZFQDBM,#{zffs00,jdbcType=VARCHAR}) > 0
+      </if>
+    </where>
+    order by CJSJ00
+  </select>
+  <select id="selectCountAllList" parameterType="com.ylz.yx.pay.system.channel.model.QueryParam" resultType="java.lang.Integer">
+    select count(*) from (
+    select A.ID0000, MAX(A.QDMC00) QDMC00,
+    RTRIM(XMLAGG(XMLPARSE(CONTENT D.qdmc00 || '、' WELLFORMED)).GETCLOBVAL(), '、') ZFQDMC,
+    RTRIM(XMLAGG(XMLPARSE(CONTENT D.qdbm00 || '、' WELLFORMED)).GETCLOBVAL(), '、') ZFQDBM,
+    MAX(A.SFQY00) SFQY00, MAX(TO_CHAR(A.CJSJ00, 'yyyy-MM-dd hh24:mi:ss')) CJSJ00
+    from PAY_FWQD00 A, PAY_FWZFGX B, PAY_ZFQD00 D
+    where A.ID0000 = B.FWQDID
+    and B.ZFQDID = D.ID0000
+    and A.SFSC00 = '0'
+    <if test="qdmc00 != null and qdmc00 != ''">
+      and instr(A.QDMC00 || A.ID0000, #{qdmc00,jdbcType=VARCHAR}) > 0
+    </if>
+    <if test="sfqy00 != null and sfqy00 != ''">
+      and A.SFQY00 = #{sfqy00,jdbcType=CHAR}
+    </if>
+    GROUP BY A.ID0000
+    )
+    <where>
+      <if test="zffs00 != null and zffs00 != ''">
+        and instr(ZFQDBM,#{zffs00,jdbcType=VARCHAR}) > 0
+      </if>
+    </where>
+  </select>
+
+
+  <resultMap id="Fwqd00ResultMap" type="com.ylz.yx.pay.system.channel.model.PayFwqd00RS">
+    <id column="ID0000" jdbcType="VARCHAR" property="id0000" />
+    <result column="QDMC00" jdbcType="VARCHAR" property="qdmc00" />
+    <result column="QDMY00" jdbcType="VARCHAR" property="qdmy00" />
+    <result column="QDYXQ0" jdbcType="TIMESTAMP" property="qdyxq0" />
+    <result column="CJSJ00" jdbcType="TIMESTAMP" property="cjsj00" />
+    <result column="SFQY00" jdbcType="CHAR" property="sfqy00" />
+    <result column="SFSC00" jdbcType="CHAR" property="sfsc00" />
+    <result column="SFZDCZ" jdbcType="CHAR" property="sfzdcz" />
+    <result column="YYLX00" jdbcType="CHAR" property="yylx00" />
+  </resultMap>
+
+  <resultMap id="FwzfgxResultMap" type="com.ylz.yx.pay.system.channel.model.PayFwzfgxRS">
+    <result column="ZFQDID" jdbcType="VARCHAR" property="zfqdid" />
+    <result column="ZFQDMC" jdbcType="VARCHAR" property="zfqdmc" />
+    <result column="ZFFS00" jdbcType="CLOB" property="zffs00" />
+  </resultMap>
+
+  <resultMap extends="Fwqd00ResultMap" id="DetailResultMap" type="com.ylz.yx.pay.system.channel.model.PayFwqd00RS">
+    <collection javaType="java.util.List" notNullColumn="ID0000" property="zfqds0" resultMap="FwzfgxResultMap" />
+  </resultMap>
+
+  <select id="detailInfo" parameterType="java.lang.String" resultMap="DetailResultMap">
+    SELECT A.ID0000, A.QDMC00, A.QDMY00, A.QDYXQ0,
+           A.CJSJ00, A.SFQY00, A.SFSC00, replace(replace(B.ZFFS00,'[',''),']','') ZFFS00,
+           B.ZFQDID, C.QDMC00 ZFQDMC, A.SFZDCZ, A.YYLX00
+    from PAY_FWQD00 A, PAY_FWZFGX B, PAY_ZFQD00 C
+    where A.ID0000 = B.FWQDID
+      and B.ZFQDID = C.ID0000
+      and A.SFSC00 = '0'
+      and A.ID0000 = #{id0000,jdbcType=VARCHAR}
+  </select>
+
+
+  <select id="getDictList" parameterType="com.ylz.yx.pay.system.dict.query.QueryParam" resultType="java.util.Map">
+    select A.ID0000 "bh0000", A.QDMC00 "mc0000"
+    from PAY_FWQD00 A
+    where A.SFSC00 = '0'
+    and A.SFQY00 = '1'
+    <if test="yylx00 != null and yylx00 != ''">
+      and A.YYLX00 = #{yylx00}
+    </if>
+    <if test="cxtj00 != null and cxtj00 != ''">
+      and instr(A.QDMC00, #{cxtj00}) > 0
+    </if>
+  </select>
+
+</mapper>

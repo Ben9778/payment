@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http#{//mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="system.ptjsgnb0">
+
+    <insert id="insertPtjsgnb0" parameterType="com.ylz.yx.pay.system.role.model.Ptjsgnb0">
+        insert into pt_jsgnb0 (jhgnid, ssxtdm, jsid00, cjr000, cjrq00)
+        values(#{jhgnid}, 'IC', #{jsid00}, #{cjr000}, to_char(sysdate, 'yyyymmdd'))
+    </insert>
+
+    <delete id="deletePtjsgnb0" parameterType="java.lang.String">
+        delete from pt_jsgnb0 where jsid00 = #{jsid00} and ssxtdm = 'IC'
+    </delete>
+
+</mapper>

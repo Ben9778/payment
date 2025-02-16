@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="pay.spjlb0">
+  <resultMap id="BaseResultMap" type="com.ylz.yx.pay.system.approval.model.PaySpjlb0">
+    <id column="ID0000" jdbcType="VARCHAR" property="id0000" />
+    <result column="GLDDID" jdbcType="VARCHAR" property="glddid" />
+    <result column="SPLCMC" jdbcType="VARCHAR" property="splcmc" />
+    <result column="LCFQR0" jdbcType="VARCHAR" property="lcfqr0" />
+    <result column="SPZT00" jdbcType="VARCHAR" property="spzt00" />
+    <result column="FQSJ00" jdbcType="TIMESTAMP" property="fqsj00" />
+    <result column="WCSJ00" jdbcType="TIMESTAMP" property="wcsj00" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ID0000, GLDDID, SPLCMC, LCFQR0, SPZT00, FQSJ00, WCSJ00
+  </sql>
+
+  <select id="select" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from PAY_SPJLB0
+    where SPZT00 = '0'
+  </select>
+
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from PAY_SPJLB0
+    where ID0000 = #{id0000,jdbcType=VARCHAR}
+  </select>
+  <select id="selectByGlddid" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from PAY_SPJLB0
+    where GLDDID = #{id0000,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from PAY_SPJLB0
+    where ID0000 = #{id0000,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.ylz.yx.pay.system.approval.model.PaySpjlb0">
+    insert into PAY_SPJLB0 (ID0000, GLDDID, SPLCMC, 
+      LCFQR0, SPZT00, FQSJ00, 
+      WCSJ00)
+    values (#{id0000,jdbcType=VARCHAR}, #{glddid,jdbcType=VARCHAR}, #{splcmc,jdbcType=VARCHAR}, 
+      #{lcfqr0,jdbcType=VARCHAR}, #{spzt00,jdbcType=VARCHAR}, #{fqsj00,jdbcType=TIMESTAMP}, 
+      #{wcsj00,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ylz.yx.pay.system.approval.model.PaySpjlb0">
+    insert into PAY_SPJLB0
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id0000 != null">
+        ID0000,
+      </if>
+      <if test="glddid != null">
+        GLDDID,
+      </if>
+      <if test="splcmc != null">
+        SPLCMC,
+      </if>
+      <if test="lcfqr0 != null">
+        LCFQR0,
+      </if>
+      <if test="spzt00 != null">
+        SPZT00,
+      </if>
+      <if test="fqsj00 != null">
+        FQSJ00,
+      </if>
+      <if test="wcsj00 != null">
+        WCSJ00,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id0000 != null">
+        #{id0000,jdbcType=VARCHAR},
+      </if>
+      <if test="glddid != null">
+        #{glddid,jdbcType=VARCHAR},
+      </if>
+      <if test="splcmc != null">
+        #{splcmc,jdbcType=VARCHAR},
+      </if>
+      <if test="lcfqr0 != null">
+        #{lcfqr0,jdbcType=VARCHAR},
+      </if>
+      <if test="spzt00 != null">
+        #{spzt00,jdbcType=VARCHAR},
+      </if>
+      <if test="fqsj00 != null">
+        #{fqsj00,jdbcType=TIMESTAMP},
+      </if>
+      <if test="wcsj00 != null">
+        #{wcsj00,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ylz.yx.pay.system.approval.model.PaySpjlb0">
+    update PAY_SPJLB0
+    <set>
+      <if test="glddid != null">
+        GLDDID = #{glddid,jdbcType=VARCHAR},
+      </if>
+      <if test="splcmc != null">
+        SPLCMC = #{splcmc,jdbcType=VARCHAR},
+      </if>
+      <if test="lcfqr0 != null">
+        LCFQR0 = #{lcfqr0,jdbcType=VARCHAR},
+      </if>
+      <if test="spzt00 != null">
+        SPZT00 = #{spzt00,jdbcType=VARCHAR},
+      </if>
+      <if test="fqsj00 != null">
+        FQSJ00 = #{fqsj00,jdbcType=TIMESTAMP},
+      </if>
+      <if test="wcsj00 != null">
+        WCSJ00 = #{wcsj00,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where ID0000 = #{id0000,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ylz.yx.pay.system.approval.model.PaySpjlb0">
+    update PAY_SPJLB0
+    set GLDDID = #{glddid,jdbcType=VARCHAR},
+      SPLCMC = #{splcmc,jdbcType=VARCHAR},
+      LCFQR0 = #{lcfqr0,jdbcType=VARCHAR},
+      SPZT00 = #{spzt00,jdbcType=VARCHAR},
+      FQSJ00 = #{fqsj00,jdbcType=TIMESTAMP},
+      WCSJ00 = #{wcsj00,jdbcType=TIMESTAMP}
+    where ID0000 = #{id0000,jdbcType=VARCHAR}
+  </update>
+
+  <select id="selectAllList" parameterType="com.ylz.yx.pay.system.approval.model.QueryParam" resultMap="BaseResultMap">
+    select
+    DISTINCT A.ID0000, GLDDID, SPLCMC, (select zwxm00 from bm_ygbm00 where ygbh00 = a.lcfqr0) LCFQR0, SPZT00, FQSJ00, WCSJ00
+    from PAY_SPJLB0 A, PAY_SPBZB0 B WHERE A.ID0000 = B.JLBID0
+        <![CDATA[
+           AND (instr(B.SPR000, #{spr000,jdbcType=VARCHAR}) > 0 OR A.LCFQR0 = #{spr000,jdbcType=VARCHAR})
+        ]]>
+
+      <if test="startTime != null and startTime != ''">
+        <![CDATA[
+              and fqsj00 >= to_date(#{startTime},'yyyy-MM-dd')
+        ]]>
+      </if>
+      <if test="endTime != null and endTime != ''">
+        <![CDATA[
+              and fqsj00 < to_date(#{endTime},'yyyy-MM-dd')+1
+        ]]>
+      </if>
+      <if test="splcmc != null and splcmc !=''">
+        and SPLCMC = #{splcmc,jdbcType=VARCHAR}
+      </if>
+      <if test="spzt00 != null and spzt00 !=''">
+        and SPZT00 = #{spzt00,jdbcType=VARCHAR}
+      </if>
+      order by fqsj00 desc
+  </select>
+
+  <select id="selectCountAllList" parameterType="com.ylz.yx.pay.system.approval.model.QueryParam" resultType="java.lang.Integer">
+    select
+    count(*)
+    from (
+    select
+    DISTINCT A.ID0000, GLDDID, SPLCMC, (select zwxm00 from bm_ygbm00 where ygbh00 = a.lcfqr0) LCFQR0, SPZT00, FQSJ00, WCSJ00
+    from PAY_SPJLB0 A, PAY_SPBZB0 B WHERE A.ID0000 = B.JLBID0
+        <![CDATA[
+           AND (instr(B.SPR000, #{spr000,jdbcType=VARCHAR}) > 0 OR A.LCFQR0 = #{spr000,jdbcType=VARCHAR})
+        ]]>
+      <if test="startTime != null and startTime != ''">
+        <![CDATA[
+              and fqsj00 >= to_date(#{startTime},'yyyy-MM-dd')
+        ]]>
+      </if>
+      <if test="endTime != null and endTime != ''">
+        <![CDATA[
+              and fqsj00 < to_date(#{endTime},'yyyy-MM-dd')+1
+        ]]>
+      </if>
+      <if test="splcmc != null and splcmc !=''">
+        and SPLCMC = #{splcmc,jdbcType=VARCHAR}
+      </if>
+      <if test="spzt00 != null and spzt00 !=''">
+        and SPZT00 = #{spzt00,jdbcType=VARCHAR}
+      </if>
+    )
+  </select>
+</mapper>

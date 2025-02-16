@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="pay.spbzb0">
+  <resultMap id="BaseResultMap" type="com.ylz.yx.pay.system.approval.model.PaySpbzb0">
+    <id column="ID0000" jdbcType="VARCHAR" property="id0000" />
+    <result column="JLBID0" jdbcType="VARCHAR" property="jlbid0" />
+    <result column="SPBZ00" jdbcType="VARCHAR" property="spbz00" />
+    <result column="SPSJ00" jdbcType="TIMESTAMP" property="spsj00" />
+    <result column="SPR000" jdbcType="VARCHAR" property="spr000" />
+    <result column="SPRXM0" jdbcType="VARCHAR" property="sprxm0" />
+    <result column="SPJG00" jdbcType="VARCHAR" property="spjg00" />
+    <result column="SQYY00" jdbcType="VARCHAR" property="sqyy00" />
+    <result column="TPFJ00" jdbcType="VARCHAR" property="tpfj00" />
+    <result column="WDFJ00" jdbcType="VARCHAR" property="wdfj00" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ID0000, JLBID0, SPBZ00, SPSJ00, SPR000, SPRXM0, SPJG00, SQYY00, TPFJ00, WDFJ00
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from PAY_SPBZB0
+    where ID0000 = #{id0000,jdbcType=VARCHAR}
+  </select>
+  <select id="selectByJlbid0" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from PAY_SPBZB0
+    where JLBID0 = #{id0000,jdbcType=VARCHAR}
+    order by spsj00,spbz00
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from PAY_SPBZB0
+    where ID0000 = #{id0000,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.ylz.yx.pay.system.approval.model.PaySpbzb0">
+    insert into PAY_SPBZB0 (ID0000, JLBID0, SPBZ00, 
+      SPSJ00, SPR000, SPRXM0, 
+      SPJG00)
+    values (#{id0000,jdbcType=VARCHAR}, #{jlbid0,jdbcType=VARCHAR}, #{spbz00,jdbcType=VARCHAR}, 
+      #{spsj00,jdbcType=TIMESTAMP}, #{spr000,jdbcType=VARCHAR}, #{sprxm0,jdbcType=VARCHAR}, 
+      #{spjg00,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ylz.yx.pay.system.approval.model.PaySpbzb0">
+    insert into PAY_SPBZB0
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id0000 != null">
+        ID0000,
+      </if>
+      <if test="jlbid0 != null">
+        JLBID0,
+      </if>
+      <if test="spbz00 != null">
+        SPBZ00,
+      </if>
+      <if test="spsj00 != null">
+        SPSJ00,
+      </if>
+      <if test="spr000 != null">
+        SPR000,
+      </if>
+      <if test="sprxm0 != null">
+        SPRXM0,
+      </if>
+      <if test="spjg00 != null">
+        SPJG00,
+      </if>
+      <if test="sqyy00 != null">
+        SQYY00,
+      </if>
+      <if test="tpfj00 != null">
+        TPFJ00,
+      </if>
+      <if test="wdfj00 != null">
+        WDFJ00,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id0000 != null">
+        #{id0000,jdbcType=VARCHAR},
+      </if>
+      <if test="jlbid0 != null">
+        #{jlbid0,jdbcType=VARCHAR},
+      </if>
+      <if test="spbz00 != null">
+        #{spbz00,jdbcType=VARCHAR},
+      </if>
+      <if test="spsj00 != null">
+        #{spsj00,jdbcType=TIMESTAMP},
+      </if>
+      <if test="spr000 != null">
+        #{spr000,jdbcType=VARCHAR},
+      </if>
+      <if test="sprxm0 != null">
+        #{sprxm0,jdbcType=VARCHAR},
+      </if>
+      <if test="spjg00 != null">
+        #{spjg00,jdbcType=VARCHAR},
+      </if>
+      <if test="sqyy00 != null">
+        #{sqyy00,jdbcType=VARCHAR},
+      </if>
+      <if test="tpfj00 != null">
+        #{tpfj00,jdbcType=VARCHAR},
+      </if>
+      <if test="wdfj00 != null">
+        #{wdfj00,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ylz.yx.pay.system.approval.model.PaySpbzb0">
+    update PAY_SPBZB0
+    <set>
+      <if test="jlbid0 != null">
+        JLBID0 = #{jlbid0,jdbcType=VARCHAR},
+      </if>
+      <if test="spbz00 != null">
+        SPBZ00 = #{spbz00,jdbcType=VARCHAR},
+      </if>
+      <if test="spsj00 != null">
+        SPSJ00 = #{spsj00,jdbcType=TIMESTAMP},
+      </if>
+      <if test="spr000 != null">
+        SPR000 = #{spr000,jdbcType=VARCHAR},
+      </if>
+      <if test="sprxm0 != null">
+        SPRXM0 = #{sprxm0,jdbcType=VARCHAR},
+      </if>
+      <if test="spjg00 != null">
+        SPJG00 = #{spjg00,jdbcType=VARCHAR},
+      </if>
+      <if test="sqyy00 != null">
+        SQYY00 = #{sqyy00,jdbcType=VARCHAR},
+      </if>
+      <if test="tpfj00 != null">
+        TPFJ00 = #{tpfj00,jdbcType=VARCHAR},
+      </if>
+      <if test="wdfj00 != null">
+        WDFJ00 = #{wdfj00,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID0000 = #{id0000,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ylz.yx.pay.system.approval.model.PaySpbzb0">
+    update PAY_SPBZB0
+    set JLBID0 = #{jlbid0,jdbcType=VARCHAR},
+      SPBZ00 = #{spbz00,jdbcType=VARCHAR},
+      SPSJ00 = #{spsj00,jdbcType=TIMESTAMP},
+      SPR000 = #{spr000,jdbcType=VARCHAR},
+      SPRXM0 = #{sprxm0,jdbcType=VARCHAR},
+      SPJG00 = #{spjg00,jdbcType=VARCHAR}
+    where ID0000 = #{id0000,jdbcType=VARCHAR}
+  </update>
+
+  <select id="selectCount" parameterType="java.lang.String" resultType="com.ylz.yx.pay.system.approval.model.PaySpbzb0">
+    select * from (select * from PAY_SPBZB0 where jlbid0 = #{id0000,jdbcType=VARCHAR} and SPR000 = #{spr000,jdbcType=VARCHAR} and spsj00 is null order by spbz00) where rownum = 1
+  </select>
+
+  <select id="selectALLCount" parameterType="java.lang.String" resultType="com.ylz.yx.pay.system.approval.model.PaySpbzb0">
+    select * from (select jlbid0,spbz00,RTRIM(XMLAGG(XMLPARSE(CONTENT spr000 || ',' WELLFORMED)).GETCLOBVAL(), ',') spr000,RTRIM(XMLAGG(XMLPARSE(CONTENT sprxm0 || ',' WELLFORMED)).GETCLOBVAL(), ',') sprxm0 from PAY_SPBZB0 where jlbid0 = #{id0000,jdbcType=VARCHAR} and spsj00 is null group by jlbid0,spbz00 order by spbz00) where rownum = 1
+  </select>
+
+  <update id="updateByJlbid0AndSpbz00" parameterType="com.ylz.yx.pay.system.approval.model.PaySpbzb0">
+    update PAY_SPBZB0
+    <set>
+      <if test="spsj00 != null">
+        SPSJ00 = #{spsj00,jdbcType=TIMESTAMP},
+      </if>
+      <if test="spr000 != null">
+        SPR000 = #{spr000,jdbcType=VARCHAR},
+      </if>
+      <if test="sprxm0 != null">
+        SPRXM0 = #{sprxm0,jdbcType=VARCHAR},
+      </if>
+      <if test="spjg00 != null">
+        SPJG00 = #{spjg00,jdbcType=VARCHAR},
+      </if>
+      <if test="sqyy00 != null">
+        SQYY00 = #{sqyy00,jdbcType=VARCHAR},
+      </if>
+      <if test="tpfj00 != null">
+        TPFJ00 = #{tpfj00,jdbcType=VARCHAR},
+      </if>
+      <if test="wdfj00 != null">
+        WDFJ00 = #{wdfj00,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where JLBID0 = #{jlbid0,jdbcType=VARCHAR}
+      and SPBZ00 = #{spbz00,jdbcType=VARCHAR}
+        <![CDATA[
+           AND instr(SPR000, #{spr000,jdbcType=VARCHAR}) > 0
+        ]]>
+      and SPSJ00 is null
+  </update>
+
+  <delete id="deleteByJlbid0AndSpbz00" parameterType="com.ylz.yx.pay.system.approval.model.PaySpbzb0">
+    delete PAY_SPBZB0
+    where JLBID0 = #{jlbid0,jdbcType=VARCHAR}
+    and SPBZ00 = #{spbz00,jdbcType=VARCHAR}
+    and SPSJ00 is null
+  </delete>
+
+  <update id="updateSpjg00" parameterType="com.ylz.yx.pay.system.approval.model.PaySpbzb0">
+    update PAY_SPBZB0 set SPJG00 = #{spjg00,jdbcType=VARCHAR}
+    where JLBID0 = #{jlbid0,jdbcType=VARCHAR}
+    and SPBZ00 = #{spbz00,jdbcType=VARCHAR}
+    and SPSJ00 is null
+  </update>
+
+  <select id="selectByJlbid0AndSpbz00" parameterType="com.ylz.yx.pay.system.approval.model.PaySpbzb0" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from PAY_SPBZB0
+    where JLBID0 = #{jlbid0,jdbcType=VARCHAR}
+    and SPBZ00 = #{spbz00,jdbcType=VARCHAR}
+    and SPSJ00 is null
+  </select>
+
+  <delete id="deleteByJlbid0" parameterType="java.lang.String">
+    delete PAY_SPBZB0
+    where JLBID0 = #{jlbid0,jdbcType=VARCHAR}
+    and SPSJ00 is null
+  </delete>
+</mapper>

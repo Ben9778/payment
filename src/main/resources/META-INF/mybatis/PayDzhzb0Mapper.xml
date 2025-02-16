@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="pay.dzhzb0">
+    <select id="cxhzsj" parameterType="com.ylz.yx.pay.record.model.QueryParam" resultType="java.util.Map">
+        SELECT SUM(PTCZJE) - SUM(PTTKJE)                                       "ptzje0",
+               SUM(PTCZBS)                                                     "ptzfbs",
+               SUM(PTTKBS)                                                     "pttkbs",
+               SUM(FWCZJE) - SUM(FWTKJE)                                       "fwzje0",
+               SUM(FWQDBS)                                                     "fwzfbs",
+               SUM(FWTKBS)                                                     "fwtkbs",
+               SUM(ZFCZJE) - SUM(ZFTKJE)                                       "zfzje0",
+               SUM(ZFPTBS)                                                     "zfzfbs",
+               SUM(ZFTKBS)                                                     "zftkbs",
+               ABS(ABS(SUM(PTCZJE) - SUM(PTTKJE)) - ABS(SUM(FWCZJE) - SUM(FWTKJE))) + ABS(ABS(SUM(PTCZJE) - SUM(PTTKJE)) - ABS(SUM(ZFCZJE) - SUM(ZFTKJE))) "cyzje0",
+               ABS(SUM(PTCZBS) - SUM(FWQDBS)) + ABS(SUM(PTCZBS) - SUM(ZFPTBS)) "cyzfbs",
+               ABS(SUM(PTTKBS) - SUM(FWTKBS)) + ABS(SUM(PTTKBS) - SUM(ZFTKBS)) "cytkbs"
+        FROM PAY_DZHZB0
+        WHERE TO_CHAR(XTDZSJ, 'YYYY-MM-DD') between #{ksrq00} and #{jsrq00}
+    </select>
+
+    <delete id="delete" parameterType="java.lang.String">
+        delete from pay_dzhzb0 where to_char(xtdzsj, 'yyyyMMdd') = #{billDate}
+    </delete>
+
+    <insert id="insert" parameterType="java.lang.String">
+        insert into pay_dzhzb0(xtdzsj, ptje00, ptczbs, pttkbs, fwqdje, fwqdbs, fwtkbs, zfptje, zfptbs, zftkbs, ptczje, pttkje, fwczje, fwtkje, zfczje, zftkje)
+        select to_date(#{billDate},'yyyyMMdd'),
+               sum(ptje00),
+               sum(ptczbs),
+               sum(pttkbs),
+               sum(fwqdje),
+               sum(fwqdbs),
+               sum(fwtkbs),
+               sum(zfptje),
+               sum(zfptbs),
+               sum(zftkbs),
+               sum(ptczje),
+               sum(pttkje),
+               sum(fwczje),
+               sum(fwtkje),
+               sum(zfczje),
+               sum(zftkje)
+        from (
+                 select sum(zfje00 / 100) ptje00,
+                        count(*)          ptczbs,
+                        0                 pttkbs,
+                        0                 fwqdje,
+                        0                 fwqdbs,
+                        0                 fwtkbs,
+                        0                 zfptje,
+                        0                 zfptbs,
+                        0                 zftkbs,
+                        sum(zfje00 / 100) ptczje,
+                        0                 pttkje,
+                        0                 fwczje,
+                        0                 fwtkje,
+                        0                 zfczje,
+                        0                 zftkje
+                 from pay_zfdd00
+                 where ddzt00 in ('2', '5')
+                   and to_char(ddcjsj, 'yyyyMMdd') = #{billDate}
+                 union all
+                 select sum(tkje00 / 100),
+                        0,
+                        count(*),
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        sum(tkje00 / 100),
+                        0,
+                        0,
+                        0,
+                        0
+                 from pay_tkdd00
+                 where tkzt00 = '2'
+                   and to_char(ddcjsj, 'yyyyMMdd') = #{billDate}
+                 union all
+                 select 0,
+                        0,
+                        0,
+                        sum(zfje00),
+                        sum(case when jylx00 = '充值' then 1 else 0 end),
+                        sum(case when jylx00 = '退款' then 1 else 0 end),
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        sum(case when jylx00 = '充值' then zfje00 else 0 end),
+                        sum(case when jylx00 = '退款' then zfje00 else 0 end),
+                        0,
+                        0
+                 from pay_fwdzd0
+                 where to_char(dzrq00, 'yyyyMMdd') = #{billDate}
+                 union all
+                 select 0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        sum(abs(zfje00)),
+                        sum(case when ywlx00 = '交易' then 1 else 0 end),
+                        sum(case when ywlx00 = '退款' then 1 else 0 end),
+                        0,
+                        0,
+                        0,
+                        0,
+                        sum(case when ywlx00 = '交易' then abs(zfje00) else 0 end),
+                        sum(case when ywlx00 = '退款' then abs(zfje00) else 0 end)
+                 from pay_zfbdzd
+                 where to_char(dzrq00, 'yyyyMMdd') = #{billDate}
+                 union all
+                 select 0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        sum(decode(jyzt00,'SUCCESS',zje000,tkje00)),
+                        sum(case when jyzt00 = 'SUCCESS' then 1 else 0 end),
+                        sum(case when jyzt00 = 'REFUND' then 1 else 0 end),
+                        0,
+                        0,
+                        0,
+                        0,
+                        sum(case when jyzt00 = 'SUCCESS' then zje000 else 0 end),
+                        sum(case when jyzt00 = 'REFUND' then tkje00 else 0 end)
+                 from pay_wxdzd0
+                 where to_char(dzrq00, 'yyyyMMdd') = #{billDate}
+                 union all
+                 select 0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        sum(jyje00 / 100),
+                        sum(case when jydm00 = 'S22' then 1 else 0 end),
+                        sum(case when jydm00 = 'S30' then 1 else 0 end),
+                        0,
+                        0,
+                        0,
+                        0,
+                        sum(case when jydm00 = 'S22' then jyje00 / 100 else 0 end),
+                        sum(case when jydm00 = 'S30' then jyje00 / 100 else 0 end)
+                 from pay_yldzd0
+                 where to_char(dzrq00, 'yyyyMMdd') = #{billDate}
+                 union all
+                 select 0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        sum(qsje00),
+                        sum(case when jylx00 = '消费' then 1 else 0 end),
+                        sum(case when jylx00 in ('联机退货','消费撤消') then 1 else 0 end),
+                        0,
+                        0,
+                        0,
+                        0,
+                        sum(case when jylx00 = '消费' then qsje00 else 0 end),
+                        sum(case when jylx00 in ('联机退货','消费撤消') then qsje00 else 0 end)
+                 from pay_posdzd
+                 where to_char(dzrq00, 'yyyyMMdd') = #{billDate}
+             )
+    </insert>
+</mapper>

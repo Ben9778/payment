@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="system.zd0000">
+  <resultMap id="BaseResultMap" type="com.ylz.yx.pay.system.dict.model.XtZd0000">
+    <id column="ID0000" jdbcType="VARCHAR" property="id0000" />
+    <result column="ZDMC00" jdbcType="VARCHAR" property="zdmc00" />
+    <result column="KEY000" jdbcType="VARCHAR" property="key000" />
+    <result column="VALUE0" jdbcType="VARCHAR" property="value0" />
+    <result column="XH0000" jdbcType="NUMERIC" property="xh0000" />
+    <result column="FJID00" jdbcType="VARCHAR" property="fjid00" />
+    <result column="BZ0000" jdbcType="VARCHAR" property="bz0000" />
+    <result column="CJSJ00" jdbcType="TIMESTAMP" property="cjsj00" />
+    <result column="SFQY00" jdbcType="CHAR" property="sfqy00" />
+    <result column="SFSC00" jdbcType="CHAR" property="sfsc00" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ID0000, ZDMC00, KEY000, VALUE0, CJSJ00, XH0000, FJID00, BZ0000, SFQY00, SFSC00
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from XT_ZD0000
+    where ID0000 = #{id0000,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from XT_ZD0000
+    where ID0000 = #{id0000,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.ylz.yx.pay.system.dict.model.XtZd0000">
+    insert into XT_ZD0000 (ID0000, ZDMC00, KEY000, 
+      VALUE0, CJSJ00, XH0000, 
+      FJID00, SFQY00, SFSC00, BZ0000)
+    values (#{id0000,jdbcType=VARCHAR}, #{zdmc00,jdbcType=VARCHAR}, #{key000,jdbcType=VARCHAR}, 
+      #{value0,jdbcType=VARCHAR}, #{cjsj00,jdbcType=TIMESTAMP}, #{xh0000,jdbcType=NUMERIC}, 
+      #{fjid00,jdbcType=VARCHAR}, #{sfqy00,jdbcType=CHAR}, #{sfsc00,jdbcType=CHAR}, #{bz0000,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ylz.yx.pay.system.dict.model.XtZd0000">
+    insert into XT_ZD0000
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id0000 != null">
+        ID0000,
+      </if>
+      <if test="zdmc00 != null">
+        ZDMC00,
+      </if>
+      <if test="key000 != null">
+        KEY000,
+      </if>
+      <if test="value0 != null">
+        VALUE0,
+      </if>
+      <if test="cjsj00 != null">
+        CJSJ00,
+      </if>
+      <if test="xh0000 != null">
+        XH0000,
+      </if>
+      <if test="fjid00 != null">
+        FJID00,
+      </if>
+      <if test="sfqy00 != null">
+        SFQY00,
+      </if>
+      <if test="sfsc00 != null">
+        SFSC00,
+      </if>
+      <if test="bz0000 != null">
+        BZ0000,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id0000 != null">
+        #{id0000,jdbcType=VARCHAR},
+      </if>
+      <if test="zdmc00 != null">
+        #{zdmc00,jdbcType=VARCHAR},
+      </if>
+      <if test="key000 != null">
+        #{key000,jdbcType=VARCHAR},
+      </if>
+      <if test="value0 != null">
+        #{value0,jdbcType=VARCHAR},
+      </if>
+      <if test="cjsj00 != null">
+        #{cjsj00,jdbcType=TIMESTAMP},
+      </if>
+      <if test="xh0000 != null">
+        #{xh0000,jdbcType=NUMERIC},
+      </if>
+      <if test="fjid00 != null">
+        #{fjid00,jdbcType=VARCHAR},
+      </if>
+      <if test="sfqy00 != null">
+        #{sfqy00,jdbcType=CHAR},
+      </if>
+      <if test="sfsc00 != null">
+        #{sfsc00,jdbcType=CHAR},
+      </if>
+      <if test="bz0000 != null">
+        #{bz0000,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ylz.yx.pay.system.dict.model.XtZd0000">
+    update XT_ZD0000
+    <set>
+      <if test="zdmc00 != null">
+        ZDMC00 = #{zdmc00,jdbcType=VARCHAR},
+      </if>
+      <if test="key000 != null">
+        KEY000 = #{key000,jdbcType=VARCHAR},
+      </if>
+      <if test="value0 != null">
+        VALUE0 = #{value0,jdbcType=VARCHAR},
+      </if>
+      <if test="cjsj00 != null">
+        CJSJ00 = #{cjsj00,jdbcType=TIMESTAMP},
+      </if>
+      <if test="xh0000 != null">
+        XH0000 = #{xh0000,jdbcType=NUMERIC},
+      </if>
+      <if test="fjid00 != null">
+        FJID00 = #{fjid00,jdbcType=VARCHAR},
+      </if>
+      <if test="sfqy00 != null">
+        SFQY00 = #{sfqy00,jdbcType=CHAR},
+      </if>
+      <if test="sfsc00 != null">
+        SFSC00 = #{sfsc00,jdbcType=CHAR},
+      </if>
+      <if test="bz0000 != null">
+        BZ0000 = #{bz0000,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID0000 = #{id0000,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ylz.yx.pay.system.dict.model.XtZd0000">
+    update XT_ZD0000
+    set ZDMC00 = #{zdmc00,jdbcType=VARCHAR},
+      KEY000 = #{key000,jdbcType=VARCHAR},
+      VALUE0 = #{value0,jdbcType=VARCHAR},
+      CJSJ00 = #{cjsj00,jdbcType=TIMESTAMP},
+      XH0000 = #{xh0000,jdbcType=NUMERIC},
+      FJID00 = #{fjid00,jdbcType=VARCHAR},
+      SFQY00 = #{sfqy00,jdbcType=CHAR},
+      SFSC00 = #{sfsc00,jdbcType=CHAR},
+      BZ0000 = #{bz0000,jdbcType=VARCHAR}
+    where ID0000 = #{id0000,jdbcType=VARCHAR}
+  </update>
+
+  <!--根据父级ID 查询子级字典列表-->
+  <select id="getDictListByParentId" parameterType="Map" resultType="com.ylz.yx.pay.system.dict.model.XtZd0000">
+     select * from  XT_ZD0000 where 1=1 and SFSC00='0'
+     <if test="fjid00 !=null and fjid00!='' ">
+        and FJID00 = #{fjid00}
+     </if>
+    <if test="fjid00 == null or fjid00 =='' ">
+      and FJID00 is null
+    </if>
+    <if test="keyword !=null and keyword!='' ">
+      and zdmc00 like '%'||#{keyword}||'%'
+    </if>
+    <if test="sfqy00 !=null and sfqy00!='' ">
+      and sfqy00 = #{sfqy00}
+    </if>
+    order by XH0000
+  </select>
+
+  <!--查询 同级元素-->
+  <select id ="getDictListByParentIdAndKey" parameterType="Map" resultType="com.ylz.yx.pay.system.dict.model.XtZd0000">
+    select * from  XT_ZD0000 where 1=1 and SFSC00='0'
+      and key000= #{key000}
+    <if test="fjid00 !=null and fjid00!='' ">
+      and FJID00 = #{fjid00}
+    </if>
+    order by XH0000
+  </select>
+
+  <select id ="getBrotherKeysExist" parameterType="Map" resultType="com.ylz.yx.pay.system.dict.model.XtZd0000">
+    select * from  XT_ZD0000 where 1=1 and SFSC00='0'
+    and key000= #{key000}
+    <if test="fjid00 !=null and fjid00!='' ">
+      and FJID00 = #{fjid00}
+    </if>
+    and id0000 !=#{id0000}
+    order by XH0000
+  </select>
+
+  <!--根据key值 查询字典列表-->
+  <select id="getDictList" parameterType="com.ylz.yx.pay.system.dict.query.QueryParam" resultType="java.util.Map">
+    select key0000 "bm0000", zdmc00 "mc0000" from  XT_ZD0000 where SFSC00='0'
+    and fjid00 = (select id0000 from XT_ZD0000 where key000=#{key000} and sfsc00='0' )
+    <if test="cxtj00 !=null and cxtj00!='' ">
+      and instr(zdmc00, #{cxtj00}) > 0
+    </if>
+  </select>
+
+  <delete id="deleteDictById" parameterType="java.lang.String">
+     update XT_ZD0000 set sfsc00 = '1' where id0000 in (
+           select id0000 from XT_ZD0000 start with id0000 = #{id0000}
+          connect by prior id0000 = fjid00 )
+  </delete>
+
+  <select id="getAllDict" resultType="com.ylz.yx.pay.system.dict.vo.GetAllDictVO">
+    select * from XT_ZD0000
+    where SFSC00='0' and SFQY00='1'
+    order by xh0000
+  </select>
+
+  <select id="getAllDictInMap" resultType="com.ylz.yx.pay.system.dict.vo.GlobalDict">
+    select * from XT_ZD0000
+    where SFSC00='0' and SFQY00='1'
+    order by xh0000
+  </select>
+
+  <select id="getSysParam" resultType="java.lang.String"
+          parameterType="java.lang.String">
+    select value0 from XT_ZD0000 where key000 = #{key000}
+  </select>
+
+  <update id="updateByKey" parameterType="java.util.Map">
+    update XT_ZD0000
+    set VALUE0 = #{value0,jdbcType=VARCHAR}
+    where KEY000 = #{key000,jdbcType=VARCHAR}
+  </update>
+</mapper>

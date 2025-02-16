@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http#{//mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="system.ptjsygb0">
+
+    <select id="getRoleUserList" resultType="com.ylz.yx.pay.system.user.model.Personnel"
+            parameterType="java.util.Map">
+        select b.xkh000, b.zwxm00 from pt_jsygb0 a, bm_ygbm00 b where a.ygbh00 = b.ygbh00
+        and a.jsid00 = #{jsid00}
+    </select>
+
+    <select id="countRoleUserList" resultType="java.lang.Long"
+            parameterType="java.lang.String">
+        select count(1) from pt_jsygb0 a, bm_ygbm00 b where a.ygbh00 = b.ygbh00
+        and a.jsid00 = #{jsid00}
+    </select>
+
+    <select id="getRolePersonnelList" resultType="com.ylz.yx.pay.system.user.model.Personnel"
+            parameterType="java.util.Map">
+        select xkh000, zwxm00, ygbh00, jsid00 from (select xkh000, zwxm00, ygbh00,
+        (select jsid00 from pt_jsygb0 where ygbh00 = a.ygbh00) jsid00 from bm_ygbm00 a)
+        where (jsid00 = #{jsid00} or jsid00 is null)
+
+        <if test="xkh000 != null and xkh000 != ''">
+            and instr(xkh000,#{xkh000})>0
+        </if>
+
+        <if test="zwxm00 != null and zwxm00 != ''">
+            and instr(zwxm00,#{zwxm00})>0
+        </if>
+
+    </select>
+
+    <insert id="insertPtjsygb0" parameterType="com.ylz.yx.pay.system.role.model.Ptjsygb0">
+        insert into pt_jsygb0 (ygbh00, jsid00, cjr000, cjrq00)
+        values(#{ygbh00}, #{jsid00}, #{cjr000}, to_char(sysdate, 'yyyymmdd'))
+    </insert>
+
+    <delete id="deletePtjsygb0" parameterType="java.lang.String">
+        delete from pt_jsygb0 where jsid00 = #{jsid00}
+    </delete>
+
+    <insert id="updatePtjsygb0" parameterType="com.ylz.yx.pay.system.role.model.Ptjsygb0">
+        update pt_jsygb0 set jsid00= #{jsid00}
+        where ygbh00 = #{ygbh00}
+    </insert>
+
+</mapper>

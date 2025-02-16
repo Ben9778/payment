@@ -1,0 +1,319 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="pay.yldzd0">
+  <resultMap id="BaseResultMap" type="com.ylz.yx.pay.record.model.PayYldzd0">
+    <result column="DZRQ00" jdbcType="VARCHAR" property="dzrq00" />
+    <result column="JYDM00" jdbcType="VARCHAR" property="jydm00" />
+    <result column="DLJGBS" jdbcType="VARCHAR" property="dljgbs" />
+    <result column="FSJGBS" jdbcType="VARCHAR" property="fsjgbs" />
+    <result column="XTGZH0" jdbcType="VARCHAR" property="xtgzh0" />
+    <result column="JYCSSJ" jdbcType="VARCHAR" property="jycssj" />
+    <result column="ZH0000" jdbcType="VARCHAR" property="zh0000" />
+    <result column="JYJE00" jdbcType="NUMERIC" property="jyje00" />
+    <result column="SHLB00" jdbcType="VARCHAR" property="shlb00" />
+    <result column="ZDLX00" jdbcType="VARCHAR" property="zdlx00" />
+    <result column="ZFDDH0" jdbcType="VARCHAR" property="zfddh0" />
+    <result column="ZFFSJ0" jdbcType="VARCHAR" property="zffsj0" />
+    <result column="XTDDH0" jdbcType="VARCHAR" property="xtddh0" />
+    <result column="ZFKLX0" jdbcType="VARCHAR" property="zfklx0" />
+    <result column="YXTGZH" jdbcType="VARCHAR" property="yxtgzh" />
+    <result column="YJYRQ0" jdbcType="VARCHAR" property="yjyrq0" />
+    <result column="SHSXF0" jdbcType="VARCHAR" property="shsxf0" />
+    <result column="JSJE00" jdbcType="VARCHAR" property="jsje00" />
+    <result column="ZFFS00" jdbcType="VARCHAR" property="zffs00" />
+    <result column="JTSHDM" jdbcType="VARCHAR" property="jtshdm" />
+    <result column="JYLX00" jdbcType="VARCHAR" property="jylx00" />
+    <result column="JYZL00" jdbcType="VARCHAR" property="jyzl00" />
+    <result column="YWLX00" jdbcType="VARCHAR" property="ywlx00" />
+    <result column="ZHLX00" jdbcType="VARCHAR" property="zhlx00" />
+    <result column="ZDLX01" jdbcType="VARCHAR" property="zdlx01" />
+    <result column="ZDHM00" jdbcType="VARCHAR" property="zdhm00" />
+    <result column="JHFS00" jdbcType="VARCHAR" property="jhfs00" />
+    <result column="YZFDDH" jdbcType="VARCHAR" property="yzfddh" />
+    <result column="SHDM00" jdbcType="VARCHAR" property="shdm00" />
+    <result column="FZRZFS" jdbcType="VARCHAR" property="fzrzfs" />
+    <result column="EJSHDM" jdbcType="VARCHAR" property="ejshdm" />
+    <result column="EJSHJC" jdbcType="VARCHAR" property="ejshjc" />
+    <result column="EJFZRZ" jdbcType="VARCHAR" property="ejfzrz" />
+    <result column="QSJE00" jdbcType="VARCHAR" property="qsje00" />
+    <result column="ZDH000" jdbcType="VARCHAR" property="zdh000" />
+    <result column="SHZDY0" jdbcType="VARCHAR" property="shzdy0" />
+    <result column="YHJE00" jdbcType="VARCHAR" property="yhje00" />
+    <result column="FPJE00" jdbcType="VARCHAR" property="fpje00" />
+    <result column="FQFKSX" jdbcType="VARCHAR" property="fqfksx" />
+    <result column="FQFKQS" jdbcType="VARCHAR" property="fqfkqs" />
+    <result column="JYJZ00" jdbcType="VARCHAR" property="jyjz00" />
+    <result column="YXTDDH" jdbcType="VARCHAR" property="yxtddh" />
+    <result column="BLSY00" jdbcType="VARCHAR" property="blsy00" />
+  </resultMap>
+
+  <select id="selectCount" resultType="java.lang.Integer" parameterType="java.lang.String">
+    select count(*) from pay_yldzd0 where to_char(dzrq00,'yyyyMMdd') = #{billDate}
+  </select>
+
+  <insert id="insertSelective" parameterType="com.ylz.yx.pay.record.model.PayYldzd0">
+    insert into PAY_YLDZD0
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="dzrq00 != null">
+        DZRQ00,
+      </if>
+      <if test="jydm00 != null">
+        JYDM00,
+      </if>
+      <if test="dljgbs != null">
+        DLJGBS,
+      </if>
+      <if test="fsjgbs != null">
+        FSJGBS,
+      </if>
+      <if test="xtgzh0 != null">
+        XTGZH0,
+      </if>
+      <if test="jycssj != null">
+        JYCSSJ,
+      </if>
+      <if test="zh0000 != null">
+        ZH0000,
+      </if>
+      <if test="jyje00 != null">
+        JYJE00,
+      </if>
+      <if test="shlb00 != null">
+        SHLB00,
+      </if>
+      <if test="zdlx00 != null">
+        ZDLX00,
+      </if>
+      <if test="zfddh0 != null">
+        ZFDDH0,
+      </if>
+      <if test="zffsj0 != null">
+        ZFFSJ0,
+      </if>
+      <if test="xtddh0 != null">
+        XTDDH0,
+      </if>
+      <if test="zfklx0 != null">
+        ZFKLX0,
+      </if>
+      <if test="yxtgzh != null">
+        YXTGZH,
+      </if>
+      <if test="yjyrq0 != null">
+        YJYRQ0,
+      </if>
+      <if test="shsxf0 != null">
+        SHSXF0,
+      </if>
+      <if test="jsje00 != null">
+        JSJE00,
+      </if>
+      <if test="zffs00 != null">
+        ZFFS00,
+      </if>
+      <if test="jtshdm != null">
+        JTSHDM,
+      </if>
+      <if test="jylx00 != null">
+        JYLX00,
+      </if>
+      <if test="jyzl00 != null">
+        JYZL00,
+      </if>
+      <if test="ywlx00 != null">
+        YWLX00,
+      </if>
+      <if test="zhlx00 != null">
+        ZHLX00,
+      </if>
+      <if test="zdlx01 != null">
+        ZDLX01,
+      </if>
+      <if test="zdhm00 != null">
+        ZDHM00,
+      </if>
+      <if test="jhfs00 != null">
+        JHFS00,
+      </if>
+      <if test="yzfddh != null">
+        YZFDDH,
+      </if>
+      <if test="shdm00 != null">
+        SHDM00,
+      </if>
+      <if test="fzrzfs != null">
+        FZRZFS,
+      </if>
+      <if test="ejshdm != null">
+        EJSHDM,
+      </if>
+      <if test="ejshjc != null">
+        EJSHJC,
+      </if>
+      <if test="ejfzrz != null">
+        EJFZRZ,
+      </if>
+      <if test="qsje00 != null">
+        QSJE00,
+      </if>
+      <if test="zdh000 != null">
+        ZDH000,
+      </if>
+      <if test="shzdy0 != null">
+        SHZDY0,
+      </if>
+      <if test="yhje00 != null">
+        YHJE00,
+      </if>
+      <if test="fpje00 != null">
+        FPJE00,
+      </if>
+      <if test="fqfksx != null">
+        FQFKSX,
+      </if>
+      <if test="fqfkqs != null">
+        FQFKQS,
+      </if>
+      <if test="jyjz00 != null">
+        JYJZ00,
+      </if>
+      <if test="yxtddh != null">
+        YXTDDH,
+      </if>
+      <if test="blsy00 != null">
+        BLSY00,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="dzrq00 != null">
+        to_date(#{dzrq00,jdbcType=VARCHAR},'yyyy-MM-dd'),
+      </if>
+      <if test="jydm00 != null">
+        #{jydm00,jdbcType=VARCHAR},
+      </if>
+      <if test="dljgbs != null">
+        #{dljgbs,jdbcType=VARCHAR},
+      </if>
+      <if test="fsjgbs != null">
+        #{fsjgbs,jdbcType=VARCHAR},
+      </if>
+      <if test="xtgzh0 != null">
+        #{xtgzh0,jdbcType=VARCHAR},
+      </if>
+      <if test="jycssj != null">
+        #{jycssj,jdbcType=VARCHAR},
+      </if>
+      <if test="zh0000 != null">
+        #{zh0000,jdbcType=VARCHAR},
+      </if>
+      <if test="jyje00 != null">
+        #{jyje00,jdbcType=VARCHAR},
+      </if>
+      <if test="shlb00 != null">
+        #{shlb00,jdbcType=VARCHAR},
+      </if>
+      <if test="zdlx00 != null">
+        #{zdlx00,jdbcType=VARCHAR},
+      </if>
+      <if test="zfddh0 != null">
+        #{zfddh0,jdbcType=VARCHAR},
+      </if>
+      <if test="zffsj0 != null">
+        #{zffsj0,jdbcType=VARCHAR},
+      </if>
+      <if test="xtddh0 != null">
+        #{xtddh0,jdbcType=VARCHAR},
+      </if>
+      <if test="zfklx0 != null">
+        #{zfklx0,jdbcType=VARCHAR},
+      </if>
+      <if test="yxtgzh != null">
+        #{yxtgzh,jdbcType=VARCHAR},
+      </if>
+      <if test="yjyrq0 != null">
+        #{yjyrq0,jdbcType=VARCHAR},
+      </if>
+      <if test="shsxf0 != null">
+        #{shsxf0,jdbcType=NUMERIC},
+      </if>
+      <if test="jsje00 != null">
+        #{jsje00,jdbcType=NUMERIC},
+      </if>
+      <if test="zffs00 != null">
+        #{zffs00,jdbcType=VARCHAR},
+      </if>
+      <if test="jtshdm != null">
+        #{jtshdm,jdbcType=VARCHAR},
+      </if>
+      <if test="jylx00 != null">
+        #{jylx00,jdbcType=VARCHAR},
+      </if>
+      <if test="jyzl00 != null">
+        #{jyzl00,jdbcType=VARCHAR},
+      </if>
+      <if test="ywlx00 != null">
+        #{ywlx00,jdbcType=VARCHAR},
+      </if>
+      <if test="zhlx00 != null">
+        #{zhlx00,jdbcType=VARCHAR},
+      </if>
+      <if test="zdlx01 != null">
+        #{zdlx01,jdbcType=VARCHAR},
+      </if>
+      <if test="zdhm00 != null">
+        #{zdhm00,jdbcType=VARCHAR},
+      </if>
+      <if test="jhfs00 != null">
+        #{jhfs00,jdbcType=VARCHAR},
+      </if>
+      <if test="yzfddh != null">
+        #{yzfddh,jdbcType=VARCHAR},
+      </if>
+      <if test="shdm00 != null">
+        #{shdm00,jdbcType=VARCHAR},
+      </if>
+      <if test="fzrzfs != null">
+        #{fzrzfs,jdbcType=VARCHAR},
+      </if>
+      <if test="ejshdm != null">
+        #{ejshdm,jdbcType=VARCHAR},
+      </if>
+      <if test="ejshjc != null">
+        #{ejshjc,jdbcType=VARCHAR},
+      </if>
+      <if test="ejfzrz != null">
+        #{ejfzrz,jdbcType=VARCHAR},
+      </if>
+      <if test="qsje00 != null">
+        #{qsje00,jdbcType=VARCHAR},
+      </if>
+      <if test="zdh000 != null">
+        #{zdh000,jdbcType=VARCHAR},
+      </if>
+      <if test="shzdy0 != null">
+        #{shzdy0,jdbcType=VARCHAR},
+      </if>
+      <if test="yhje00 != null">
+        #{yhje00,jdbcType=VARCHAR},
+      </if>
+      <if test="fpje00 != null">
+        #{fpje00,jdbcType=VARCHAR},
+      </if>
+      <if test="fqfksx != null">
+        #{fqfksx,jdbcType=VARCHAR},
+      </if>
+      <if test="fqfkqs != null">
+        #{fqfkqs,jdbcType=VARCHAR},
+      </if>
+      <if test="jyjz00 != null">
+        #{jyjz00,jdbcType=VARCHAR},
+      </if>
+      <if test="yxtddh != null">
+        #{yxtddh,jdbcType=VARCHAR},
+      </if>
+      <if test="blsy00 != null">
+        #{blsy00,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+</mapper>
