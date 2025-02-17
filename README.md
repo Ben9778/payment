@@ -22,4 +22,4 @@
 - ActiveMQ 5.15.11
 
 ## 反饋與聯繫
-如有任何疑問或建議，請發送郵件至：BennyWong01@outlook.com。
+如有任何疑問或建議，請發送郵件至：Bennywong01@outlook.com。
